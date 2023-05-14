@@ -14,7 +14,12 @@ public class User {
 
     public User() {
     }
-
+    public User(int id, String name, String avatar, Set<Role> roleSet) {
+        this.id = id;
+        this.name = name;
+        this.avatar = avatar;
+        this.roleSet = roleSet;
+    }
     public User(String name, String username, String email, String password, Set<Role> roleSet) {
         this.name = name;
         this.username = username;

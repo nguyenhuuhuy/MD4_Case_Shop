@@ -107,6 +107,9 @@
                             <li class="scroll"><a href="#feature">features</a></li>
                             <li class="scroll"><a href="#blog">blog</a></li>
                             <li class="scroll"><a href="#newsletter">contact</a></li>
+                            <li><a href="/user?action=register">Register</a></li>
+                            <li><a href="/user?action=login">Login</a></li>
+
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
                 </div><!--/.container-->
