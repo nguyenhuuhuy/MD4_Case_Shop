@@ -24,6 +24,7 @@
 
         .h-custom {
             height: calc(100% - 73px);
+
         }
 
         @media (max-width: 450px) {
@@ -32,10 +33,16 @@
             }
         }
 
+        .login__profile {
+            margin: 12px;
+            font-weight: 400;
+        }
+
     </style>
+
 </head>
 <body>
-<section class="vh-100">
+<section class="vh-100" style="margin-top: 120px; color: black">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
@@ -43,44 +50,30 @@
                      class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <c:if test='${requestScope["validate"]!=null}'>
-                    <label style="color: red">${requestScope["validate"]}</label>
-                </c:if>
+
                 <form method="post">
                     <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-                        <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-
-                        <button type="button" class="btn btn-primary btn-floating mx-1">
-                            <i class="fab fa-linkedin-in"></i>
-                        </button>
+                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in form</p>
                     </div>
-
-                    <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0">Or</p>
-                    </div>
-
-                    <!-- Email input -->
+                    <%--                     Thông báo lỗi--%>
+                    <c:if test='${requestScope["validate"]!=null}'>
+                        <p style="color: red">${requestScope["validate"]}</p>
+                    </c:if>
                     <div class="form-outline mb-4">
-                        <input type="text"  class="form-control form-control-lg"
+                        <label class="form-label login__profile">User Name</label>
+                        <input type="text" class="form-control form-control-lg"
                                placeholder="Enter a valid user name" name="username"/>
-                        <label class="form-label" >User Name</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password"  class="form-control form-control-lg"
+                        <label class="form-label login__profile">Password</label>
+                        <input type="password" class="form-control form-control-lg"
                                placeholder="Enter password" name="password"/>
-                        <label class="form-label" >Password</label>
                     </div>
 
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center "
+                         style="margin-top: 10px; margin-bottom: 5px">
                         <!-- Checkbox -->
                         <div class="form-check mb-0">
                             <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3"/>
@@ -88,46 +81,22 @@
                                 Remember me
                             </label>
                         </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
+                        <a href="#!" class="text-body " style="color: #ff9966">Forgot password?</a>
                     </div>
 
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" class="btn btn-primary btn-lg"
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login
                         </button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                                                                                          class="link-danger">Register</a>
+                        <p class="small fw-bold mt-2 pt-1 mb-0" style="margin-top: 5px; ">Don't have an account? <a
+                                href="#!"
+                                class="link-primary" style=" color: #337ab7">Register</a>
                         </p>
                     </div>
 
                 </form>
             </div>
         </div>
-    </div>
-    <div
-            class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-        <!-- Copyright -->
-        <div class="text-white mb-3 mb-md-0">
-            Copyright © 2020. All rights reserved.
-        </div>
-        <!-- Copyright -->
-
-        <!-- Right -->
-        <div>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="#!" class="text-white">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-        </div>
-        <!-- Right -->
     </div>
 </section>
 </body>
