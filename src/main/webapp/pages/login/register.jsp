@@ -69,7 +69,6 @@
                                                                value="${requestScope["password"]}"/>
                                                     </div>
                                                 </div>
-
                                                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                                                      style="text-align: center ; margin: 15px">
                                                     <button type="submit" class="btn btn-primary btn-lg">Register

@@ -93,7 +93,6 @@
                                 class="link-primary" style=" color: #337ab7">Register</a>
                         </p>
                     </div>
-
                 </form>
             </div>
         </div>
