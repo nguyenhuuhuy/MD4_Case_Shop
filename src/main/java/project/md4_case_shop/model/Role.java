@@ -1,6 +1,5 @@
 package project.md4_case_shop.model;
 
-import java.lang.ref.PhantomReference;
 
 public class Role {
     private int id;

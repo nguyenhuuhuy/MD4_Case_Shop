@@ -115,6 +115,6 @@
     <!--footer end-->
 </head>
 <body>
-<h1>Day la footer</h1>
+<%--<h1>Day la footer</h1>--%>
 </body>
 </html>

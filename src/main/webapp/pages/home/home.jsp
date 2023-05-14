@@ -10,9 +10,9 @@
 <head>
 </head>
 <body>
-    <%--banner--%>
-    <jsp:include page="/pages/home/banner.jsp"></jsp:include>
-    <%--banner--%>
+<%--banner--%>
+<jsp:include page="/pages/home/banner.jsp"></jsp:include>
+<%--banner--%>
 <%--arrivals--%>
 <jsp:include page="/pages/home/arrivals.jsp"></jsp:include>
 <%--arrivals--%

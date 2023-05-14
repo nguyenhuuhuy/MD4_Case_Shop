@@ -17,8 +17,8 @@ public class UserServiceIMPL implements IUserService{
     private final String SELECT_ALL_EMAIL = "SELECT email FROM user;";
     private final String INSERT_INTO_USER = "INSERT INTO user(name, username, email, password,avatar) VALUES (?,?,?,?,?);";
     private final String INSERT_INTO_USER_ROLE = "INSERT INTO userrole(iduser, idrole) VALUES (?,?);";
-    private final String SELECT_USER_LOGIN = "SELECT * FROM user where userName=? AND password=?;";
-    private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN user_role ur on role.id = ur.role_id where user_id=?;";
+    private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND password=?;";
+    private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
     private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
    // check Name
     @Override
@@ -97,11 +97,11 @@ public class UserServiceIMPL implements IUserService{
     }
 
     @Override
-    public User userLogin(String userName, String password) {
+    public User userLogin(String username, String password) {
         User user = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_LOGIN);
-            preparedStatement.setString(1, userName);
+            preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

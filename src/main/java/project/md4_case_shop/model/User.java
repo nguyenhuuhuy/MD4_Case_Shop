@@ -10,21 +10,45 @@ public class User {
     private String email;
     private String password;
     private String avatar = "https://firebasestorage.googleapis.com/v0/b/project-e0da8.appspot.com/o/avatar%20default.jpg?alt=media&token=2b58c903-0e85-4ef0-a11f-4057c2f076ff";
+    private boolean status;
     Set<Role> roleSet = new HashSet<>();
 
     public User() {
     }
-    public User(int id, String name, String avatar, Set<Role> roleSet) {
+
+    public User(int id, String name, String username, String email, String password, String avatar, boolean status, Set<Role> roleSet) {
         this.id = id;
         this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.status = status;
+        this.roleSet = roleSet;
+    }
+
+    public User(int id, String name, String username, String email, String password, String avatar, Set<Role> roleSet) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
         this.avatar = avatar;
         this.roleSet = roleSet;
     }
+
     public User(String name, String username, String email, String password, Set<Role> roleSet) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roleSet = roleSet;
+    }
+
+    public User(int id, String name, String avatar, Set<Role> roleSet) {
+        this.id = id;
+        this.name = name;
+        this.avatar = avatar;
         this.roleSet = roleSet;
     }
 
@@ -74,6 +98,14 @@ public class User {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Set<Role> getRoleSet() {

@@ -68,16 +68,16 @@
 
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="form3Example3" class="form-control form-control-lg"
+                        <input type="text"  class="form-control form-control-lg"
                                placeholder="Enter a valid user name" name="username"/>
-                        <label class="form-label" for="form3Example3">User Name</label>
+                        <label class="form-label" >User Name</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-outline mb-3">
-                        <input type="password" id="form3Example4" class="form-control form-control-lg"
+                        <input type="password"  class="form-control form-control-lg"
                                placeholder="Enter password" name="password"/>
-                        <label class="form-label" for="form3Example4">Password</label>
+                        <label class="form-label" >Password</label>
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center">
