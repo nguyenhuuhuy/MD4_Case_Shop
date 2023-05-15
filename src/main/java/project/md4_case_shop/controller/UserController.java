@@ -12,7 +12,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -146,6 +148,9 @@ public class UserController extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userLogin", user);
+            Set<Role> roleSet = user.getRoleSet();
+            List<Role> roles = new ArrayList<>(roleSet);
+            session.setAttribute("role",roles.get(0).getName());
             try {
                 response.sendRedirect("index.jsp");
             } catch (IOException e) {

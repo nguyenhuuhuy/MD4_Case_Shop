@@ -121,6 +121,9 @@
                             <li><a href="/user?action=register">Register</a></li>
                             <li><a href="/user?action=login">Login</a></li>
                         </c:if>
+                        <c:if test='${sessionScope["role"] == "PM" || sessionScope["role"] == "ADMIN"}'>
+                            <p>đây là phần dành cho admin</p>
+                        </c:if>
                     </ul><!--/.nav -->
                 </div><!-- /.navbar-collapse -->
             </div><!--/.container-->
