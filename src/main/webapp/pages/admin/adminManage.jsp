@@ -47,7 +47,7 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>USER</span></a>
         </li>
-                <hr class="sidebar-divider">
+        <hr class="sidebar-divider">
 
         <li class="nav-item active">
             <a class="nav-link" href="tables.html">
@@ -399,7 +399,7 @@
 </div>
 </body>
 
-<!-- Bootstrap core JavaScript-->
+<!--  Bootstrap core JavaScript -->
 <script src="../../assets/js/jquery.min.js" rel="stylesheet"></script>
 <script src="../../assets/js/bootstrap.bundle.min.js" rel="stylesheet"></script>
 <!-- Core plugin JavaScript-->
