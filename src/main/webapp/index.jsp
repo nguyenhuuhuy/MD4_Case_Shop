@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html >
+<html>
 <jsp:include page='/layout/header.jsp'>
     <jsp:param name="articleId" value=""/>
 </jsp:include>
@@ -11,8 +11,8 @@
 <%--home--%>
 <jsp:include page="/pages/home/home.jsp"></jsp:include>
 <%--home--%>
-<h1>Test huy</h1>
-<%--alo--%>
+
+<h1>Change</h1>
 </body>
 </html>
 <jsp:include page='/layout/footer.jsp'>

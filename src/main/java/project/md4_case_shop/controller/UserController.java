@@ -172,7 +172,7 @@ public class UserController extends HttpServlet {
     }
     // điều hướng tới trang admin đang đợi trang
     private void showFormAdmin(HttpServletRequest request,HttpServletResponse response){
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin_home/homeAdmin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/adminManage.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {
