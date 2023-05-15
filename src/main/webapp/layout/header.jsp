@@ -94,7 +94,6 @@
                     </ul>
                 </div><!--/.attr-nav-->
                 <!-- End Atribute Navigation -->
-
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
@@ -121,9 +120,6 @@
                             <li><a href="/user?action=register">Register</a></li>
                             <li><a href="/user?action=login">Login</a></li>
                         </c:if>
-                        <c:if test='${sessionScope["role"] == "PM" || sessionScope["role"] == "ADMIN"}'>
-                            <a>đây là phần dành cho admin</a>
-                        </c:if>
                     </ul><!--/.nav -->
                 </div><!-- /.navbar-collapse -->
             </div><!--/.container-->
@@ -131,10 +127,8 @@
         <!-- End Navigation -->
     </div><!--/.header-area-->
     <div class="clearfix"></div>
-
 </div><!-- /.top-area-->
 <!-- top-area End -->
-
 <%--</header><!--/.welcome-hero-->--%>
 <!--welcome-hero end -->
 </body>
