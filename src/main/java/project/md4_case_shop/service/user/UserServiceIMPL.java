@@ -20,49 +20,14 @@ public class UserServiceIMPL implements IUserService{
     private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND password=?;";
     private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
     private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
-   // check Name
+
     @Override
-    public boolean existedByUserName(String username) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERNAME);
-            List<String> listUserName = new ArrayList<>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                listUserName.add(resultSet.getString("username"));
-            }
-            for (int i = 0; i < listUserName.size(); i++) {
-                if (username.equals(listUserName.get(i))) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
+    public List<User> findAll() throws SQLException {
+        return null;
     }
-    // check email
+
     @Override
-    public boolean existedByEmail(String email) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMAIL);
-            List<String> listUserName = new ArrayList<>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                listUserName.add(resultSet.getString("email"));
-            }
-            for (int i = 0; i < listUserName.size(); i++) {
-                if (email.equals(listUserName.get(i))) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-    // save user
-    @Override
-    public void save(User user) {
+    public void save(User user) throws SQLException {
         try {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_USER, Statement.RETURN_GENERATED_KEYS);
@@ -94,6 +59,56 @@ public class UserServiceIMPL implements IUserService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public User findById(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void deleteById(int id) throws SQLException {
+
+    }
+
+    @Override
+    public boolean existedByUserName(String username) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERNAME);
+            List<String> listUserName = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listUserName.add(resultSet.getString("username"));
+            }
+            for (int i = 0; i < listUserName.size(); i++) {
+                if (username.equals(listUserName.get(i))) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean existedByEmail(String email) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMAIL);
+            List<String> listUserName = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listUserName.add(resultSet.getString("email"));
+            }
+            for (int i = 0; i < listUserName.size(); i++) {
+                if (email.equals(listUserName.get(i))) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
     @Override
@@ -148,4 +163,6 @@ public class UserServiceIMPL implements IUserService{
             throw new RuntimeException(e);
         }
     }
+    // check Name
+
 }

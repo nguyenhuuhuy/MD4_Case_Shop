@@ -12,6 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -50,20 +51,24 @@ public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "register":
-                actionRegister(request, response);
-                break;
-            case "login":
-                actionLogin(request, response);
-                break;
-            case "avatar":
-                actionUpdateAvatar(request,response);
-                break;
+        try {
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
+            }
+            switch (action) {
+                case "register":
+                    actionRegister(request, response);
+                    break;
+                case "login":
+                    actionLogin(request, response);
+                    break;
+                case "avatar":
+                    actionUpdateAvatar(request,response);
+                    break;
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,7 +84,7 @@ public class UserController extends HttpServlet {
         }
     }
 
-    private void actionRegister(HttpServletRequest request, HttpServletResponse response) {
+    private void actionRegister(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String name = request.getParameter("name");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
@@ -140,7 +145,7 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
+    // Đăng Nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -161,8 +166,18 @@ public class UserController extends HttpServlet {
             showFormLogin(request, response);
         }
     }
-
+    // đăng xuất
     private void logOut(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session.getAttribute("userLogin")!=null){
+            session.removeAttribute("userLogin");
+            session.invalidate();
+        }
+        try {
+            response.sendRedirect("index.jsp");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
