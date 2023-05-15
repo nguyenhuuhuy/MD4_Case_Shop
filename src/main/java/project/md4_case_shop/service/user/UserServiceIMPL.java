@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class UserServiceIMPL implements IUserService{
     private Connection connection = ConnectMySQL.getConnection();
+    private final String LIST_USER = "SELECT * FROM user";
     private final String SELECT_ALL_USERNAME = "SELECT username FROM user;";
     private final String SELECT_ALL_EMAIL = "SELECT email FROM user;";
     private final String INSERT_INTO_USER = "INSERT INTO user(name, username, email, password,avatar) VALUES (?,?,?,?,?);";
@@ -23,7 +24,25 @@ public class UserServiceIMPL implements IUserService{
 
     @Override
     public List<User> findAll() throws SQLException {
-        return null;
+        List<User> userList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(LIST_USER);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String avatar = resultSet.getString("avatar");
+                boolean status = resultSet.getBoolean("status");
+                Set<Role> roleSet = findRoleByUserId(id);
+                userList.add(new User(id,name,username,email,password,avatar,status,roleSet));
+            }
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return userList;
     }
 
     @Override

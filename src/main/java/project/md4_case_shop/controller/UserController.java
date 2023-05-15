@@ -27,25 +27,34 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
+        try {
+            String action = request.getParameter("action");
+            if (action == null) {
+                action = "";
+            }
+            switch (action) {
+                case "register":
+                    showFormRegister(request, response);
+                    break;
+                case "login":
+                    showFormLogin(request, response);
+                    break;
+                case "logout":
+                    logOut(request, response);
+                    break;
+                case "avatar":
+                    showFormChangeAvatar(request,response);
+                    break;
+                default:
+                    listUser(request,response);
+            }
+        } catch (SQLException e){
+            throw new RuntimeException(e);
         }
-        switch (action) {
-            case "register":
-                showFormRegister(request, response);
-                break;
-            case "login":
-                showFormLogin(request, response);
-                break;
-            case "logout":
-                logOut(request, response);
-                break;
-            case "avatar":
-                showFormChangeAvatar(request,response);
-                break;
-        }
+
     }
+
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,6 +75,8 @@ public class UserController extends HttpServlet {
                 case "avatar":
                     actionUpdateAvatar(request,response);
                     break;
+                default:
+                    listUser(request,response);
             }
         } catch(SQLException e) {
             throw new RuntimeException(e);
@@ -83,7 +94,21 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+    // hiện danh sách user
+    private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        List<User> userList = userService.findAll();
+        request.setAttribute("listUser", userList);
+       RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
+
+    }
     private void actionRegister(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String name = request.getParameter("name");
         String username = request.getParameter("username");
@@ -145,8 +170,19 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+    // điều hướng tới trang admin đang đợi trang
+    private void showFormAdmin(HttpServletRequest request,HttpServletResponse response){
+        RequestDispatcher dispatcher = request.getRequestDispatcher("");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     // Đăng Nhập
-    private void actionLogin(HttpServletRequest request, HttpServletResponse response) {
+    private void actionLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = userService.userLogin(username, password);
@@ -156,6 +192,11 @@ public class UserController extends HttpServlet {
             Set<Role> roleSet = user.getRoleSet();
             List<Role> roles = new ArrayList<>(roleSet);
             session.setAttribute("role",roles.get(0).getName());
+            for (int i = 0; i < roles.size(); i++) {
+                if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM){
+                    listUser(request,response);
+                }
+            }
             try {
                 response.sendRedirect("index.jsp");
             } catch (IOException e) {
@@ -181,6 +222,7 @@ public class UserController extends HttpServlet {
     }
 
     private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
+
     }
 
     private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response) {
