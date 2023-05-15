@@ -194,14 +194,21 @@ public class UserController extends HttpServlet {
             session.setAttribute("role",roles.get(0).getName());
             for (int i = 0; i < roles.size(); i++) {
                 if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM){
-                   showFormAdmin(request,response);
+                    try {
+                        response.sendRedirect("pages/admin/adminManage.jsp");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+
+                    try {
+                        response.sendRedirect("index.jsp");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
-            try {
-                response.sendRedirect("index.jsp");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
         } else {
             request.setAttribute("validate", "Đăng nhập thất bại vui lòng kiểm tra lại mật khẩu và tài khoản đăng nhập");
             showFormLogin(request, response);
