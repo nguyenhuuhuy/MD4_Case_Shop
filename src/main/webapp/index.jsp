@@ -12,7 +12,7 @@
 <jsp:include page="/pages/home/home.jsp"></jsp:include>
 <%--home--%>
 
-
+<%--alo--%>
 </body>
 </html>
 <jsp:include page='/layout/footer.jsp'>
