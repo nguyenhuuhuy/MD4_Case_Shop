@@ -8,4 +8,5 @@ public interface IGenericService<T> {
     void save (T t) throws SQLException;
     T findById(int id) throws SQLException;
     void deleteById(int id) throws SQLException;
+    List<T> findByName(String name);
 }
