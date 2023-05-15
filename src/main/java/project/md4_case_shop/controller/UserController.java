@@ -27,29 +27,29 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        try {
-            String action = request.getParameter("action");
-            if (action == null) {
-                action = "";
-            }
-            switch (action) {
-                case "register":
-                    showFormRegister(request, response);
-                    break;
-                case "login":
-                    showFormLogin(request, response);
-                    break;
-                case "logout":
-                    logOut(request, response);
-                    break;
-                case "avatar":
-                    showFormChangeAvatar(request,response);
-                    break;
-                default:
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "register":
+                showFormRegister(request, response);
+                break;
+            case "login":
+                showFormLogin(request, response);
+                break;
+            case "logout":
+                logOut(request, response);
+                break;
+            case "avatar":
+                showFormChangeAvatar(request,response);
+                break;
+            default:
+                try {
                     listUser(request,response);
-            }
-        } catch (SQLException e){
-            throw new RuntimeException(e);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
         }
 
     }
@@ -172,7 +172,7 @@ public class UserController extends HttpServlet {
     }
     // điều hướng tới trang admin đang đợi trang
     private void showFormAdmin(HttpServletRequest request,HttpServletResponse response){
-        RequestDispatcher dispatcher = request.getRequestDispatcher("");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin_home/homeAdmin.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {
@@ -194,7 +194,7 @@ public class UserController extends HttpServlet {
             session.setAttribute("role",roles.get(0).getName());
             for (int i = 0; i < roles.size(); i++) {
                 if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM){
-                    listUser(request,response);
+                   showFormAdmin(request,response);
                 }
             }
             try {

@@ -91,6 +91,11 @@ public class UserServiceIMPL implements IUserService{
     }
 
     @Override
+    public List<User> findByName(String name) {
+        return null;
+    }
+
+    @Override
     public boolean existedByUserName(String username) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERNAME);
