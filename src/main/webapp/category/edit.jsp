@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/">Back menu</a>
+<a href="/category">Back menu</a>
 <c:if test='${requestScope["message"]!= null}'>
     <span style="color:blue">${requestScope["message"]}</span>
 </c:if>

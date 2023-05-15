@@ -12,14 +12,14 @@
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
   <li class="nav-item active">
-    <a class="nav-link" href="user">
+    <a class="nav-link" href="/user">
       <i class="fas fa-fw fa-table"></i>
       <span>USER</span></a>
   </li>
   <hr class="sidebar-divider">
 
   <li class="nav-item active">
-    <a class="nav-link" href="category">
+    <a class="nav-link" href="/category">
       <i class="fas fa-fw fa-table"></i>
       <span>CATEGORY</span></a>
   </li>
