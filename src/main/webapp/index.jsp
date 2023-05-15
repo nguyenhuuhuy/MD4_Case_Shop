@@ -11,8 +11,6 @@
 <%--home--%>
 <jsp:include page="/pages/home/home.jsp"></jsp:include>
 <%--home--%>
-
-<h1>Change</h1>
 </body>
 </html>
 <jsp:include page='/layout/footer.jsp'>
