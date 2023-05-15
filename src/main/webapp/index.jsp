@@ -11,7 +11,7 @@
 <%--home--%>
 <jsp:include page="/pages/home/home.jsp"></jsp:include>
 <%--home--%>
-
+<h1>Test huy</h1>
 <%--alo--%>
 </body>
 </html>
