@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class UserServiceIMPL implements IUserService{
     private Connection connection = ConnectMySQL.getConnection();
+    private final String LIST_USER = "SELECT * FROM user";
     private final String SELECT_ALL_USERNAME = "SELECT username FROM user;";
     private final String SELECT_ALL_EMAIL = "SELECT email FROM user;";
     private final String INSERT_INTO_USER = "INSERT INTO user(name, username, email, password,avatar) VALUES (?,?,?,?,?);";
@@ -20,49 +21,32 @@ public class UserServiceIMPL implements IUserService{
     private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND password=?;";
     private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
     private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
-   // check Name
+
     @Override
-    public boolean existedByUserName(String username) {
+    public List<User> findAll() throws SQLException {
+        List<User> userList = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERNAME);
-            List<String> listUserName = new ArrayList<>();
+            PreparedStatement preparedStatement = connection.prepareStatement(LIST_USER);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                listUserName.add(resultSet.getString("username"));
+            while (resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String avatar = resultSet.getString("avatar");
+                boolean status = resultSet.getBoolean("status");
+                Set<Role> roleSet = findRoleByUserId(id);
+                userList.add(new User(id,name,username,email,password,avatar,status,roleSet));
             }
-            for (int i = 0; i < listUserName.size(); i++) {
-                if (username.equals(listUserName.get(i))) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw new RuntimeException(e);
         }
-        return false;
+        return userList;
     }
-    // check email
+
     @Override
-    public boolean existedByEmail(String email) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMAIL);
-            List<String> listUserName = new ArrayList<>();
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                listUserName.add(resultSet.getString("email"));
-            }
-            for (int i = 0; i < listUserName.size(); i++) {
-                if (email.equals(listUserName.get(i))) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
-    // save user
-    @Override
-    public void save(User user) {
+    public void save(User user) throws SQLException {
         try {
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_USER, Statement.RETURN_GENERATED_KEYS);
@@ -94,6 +78,61 @@ public class UserServiceIMPL implements IUserService{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public User findById(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void deleteById(int id) throws SQLException {
+
+    }
+
+    @Override
+    public List<User> findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public boolean existedByUserName(String username) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERNAME);
+            List<String> listUserName = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listUserName.add(resultSet.getString("username"));
+            }
+            for (int i = 0; i < listUserName.size(); i++) {
+                if (username.equals(listUserName.get(i))) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean existedByEmail(String email) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMAIL);
+            List<String> listUserName = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                listUserName.add(resultSet.getString("email"));
+            }
+            for (int i = 0; i < listUserName.size(); i++) {
+                if (email.equals(listUserName.get(i))) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 
     @Override
@@ -148,4 +187,6 @@ public class UserServiceIMPL implements IUserService{
             throw new RuntimeException(e);
         }
     }
+    // check Name
+
 }

@@ -89,7 +89,7 @@
                                 style="padding-left: 2.5rem; padding-right: 2.5rem;">Login
                         </button>
                         <p class="small fw-bold mt-2 pt-1 mb-0" style="margin-top: 5px; ">Don't have an account? <a
-                                href="#!"
+                                href="/user?action=register"
                                 class="link-primary" style=" color: #337ab7">Register</a>
                         </p>
                     </div>
