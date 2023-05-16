@@ -237,7 +237,7 @@
                             </a>
                         </div>
                     </li>
-
+                    <li><a href="/user?action=logout"><i class="fa-solid fa-right-from-bracket" style="margin-top: 15px;color: black;font-size: 35px"></i></a></li>
                 </ul>
 
             </nav>
