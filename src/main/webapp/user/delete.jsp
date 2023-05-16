@@ -23,7 +23,6 @@
     <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top">
@@ -244,44 +243,17 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>username</th>
-                    <th>email</th>
-                    <th>password</th>
-                    <th>avatar</th>
-                    <th>role</th>
-                    <th>edit</th>
-                    <th>delete</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items='${requestScope["listUser"]}' var="user">
-                    <tr align="center">
-                        <td>${user.id}</td>
-                        <td>${user.name}</td>
-                        <td>${user.username}</td>
-                        <td>${user.email}</td>
-                        <td>${user.password}</td>
-                        <td>
-                            <img src="${user.avatar}" alt="avatar" width="40" height="40">
-                        </td>
-                        <td>${user.roleSet}</td>
-                        <td>
-                            <a href="user?action=edit&id=${user.id}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        </td>
-                        <td>
-                            <a href="user?action=delete&id=${user.id}"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-                <!-- /.container-fluid -->
+            <form method="post" style="margin-left: 400px">
+                <input type="hidden" name="id" value="${requestScope['id']}">
+                Are you sure you want to delete ?<br><br>
+                <button type="submit" class="btn btn-success m-3">Delete</button>
+                <a href="user">
+                    <button type="button" class="btn btn-danger">
+                        Back
+                    </button>
+                </a>
+            </form>
+            <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
         <!-- Footer -->
