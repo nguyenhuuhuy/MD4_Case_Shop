@@ -10,6 +10,9 @@
 <html>
 <head>
 </head>
+<jsp:include page='/layout/header.jsp'>
+    <jsp:param name="articleId" value=""/>
+</jsp:include>
 <body>
 <%--banner--%>
 <jsp:include page="/pages/home/banner.jsp"></jsp:include>
@@ -31,3 +34,6 @@
 <%--clients--%>
 </body>
 </html>
+<jsp:include page='/layout/footer.jsp'>
+    <jsp:param name="articleId" value=""/>
+</jsp:include>
