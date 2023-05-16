@@ -29,6 +29,7 @@
   <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top">
@@ -50,18 +51,18 @@
         </form>
         <!-- Topbar Search -->
         <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="post">
           <div class="input-group">
             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2">
+                   aria-label="Search" aria-describedby="basic-addon2" name="search">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
+              <button class="btn btn-primary" type="submit">
                 <i class="fas fa-search fa-sm"></i>
               </button>
             </div>
           </div>
         </form>
-
+        <a href="product?action=create" type="button" class="btn btn-success m-3">CREATE PRODUCT</a>
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
@@ -242,19 +243,11 @@
               </a>
             </div>
           </li>
+        <li><a href="/user?action=logout"><i class="fa-solid fa-right-from-bracket" style="margin-top: 15px;color: black;font-size: 35px"></i></a></li>
 
         </ul>
-
       </nav>
       <!-- End of Topbar -->
-
-      <a href="product?action=create" type="button" class="btn btn-success m-3">CREATE PRODUCT</a>
-      <form method="post">
-        <div class="d-flex align-items-center">
-          <input type="text" name="search" placeholder="Search Product and Category" style="height: 37px" class="ms-3 rounded">
-          <button type="submit" class="btn btn-secondary mx-3">Search</button>
-          <a href="" type="button" class="btn btn-danger">Back</a>
-        </div>
 
       </form>
       <table class="table table-striped table-hover text-center">
