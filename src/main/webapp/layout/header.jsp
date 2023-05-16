@@ -116,7 +116,7 @@
                         <li class="scroll"><a href="#blog">blog</a></li>
                         <li class="scroll"><a href="#newsletter">contact</a></li>
                         <c:if test='${sessionScope["userLogin"]!=null}'>
-                            <li><a href="">welcome ${sessionScope["userLogin"].getName()}</a></li>
+                            <li><a href="/user?action=editUserLogin&id=${sessionScope['userLogin'].getId()}">welcome ${sessionScope["userLogin"].getName()}</a></li>
                             <li><a href="/user?action=logout">Log Out</a></li>
                         </c:if>
                         <c:if test='${sessionScope["userLogin"]==null}'>
