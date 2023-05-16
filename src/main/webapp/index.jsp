@@ -8,9 +8,9 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-home
+<%--home--%>
 <jsp:include page="/pages/home/home.jsp"></jsp:include>
-home
+<%--home--%>
 
 </body>
 </html>
