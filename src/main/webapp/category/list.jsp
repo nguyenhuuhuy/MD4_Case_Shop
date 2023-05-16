@@ -251,7 +251,7 @@
             <form method="post">
 
                 <div class="d-flex align-items-center">
-                    <input type="text" name="search" placeholder="Search Category and By Name" style="height: 37px" class="ms-3 rounded">
+                    <input type="text" name="search" placeholder="Search Category " style="height: 37px" class="ms-3 rounded">
                     <button type="submit" class="btn btn-secondary mx-3">Search</button>
                     <a href="" type="button" class="btn btn-danger">Back</a>
                 </div>

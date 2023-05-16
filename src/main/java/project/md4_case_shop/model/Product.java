@@ -1,6 +1,7 @@
 package project.md4_case_shop.model;
 
 public class Product {
+
     private int id;
     private String name;
     private Category category;
@@ -8,29 +9,35 @@ public class Product {
     private String image;
     private int quantity;
     private int stock;
-    private int idCat;
+    private int idCart;
 
     public Product() {
     }
 
-    public Product(int id, String name, Category category, float price, String image, int quantity, int stock, int idCat) {
+    public Product(int id, String name, Category category, float price, String image, int quantity) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
         this.quantity = quantity;
-        this.stock = stock;
-        this.idCat = idCat;
+        this.setIdCart(category.getcId());
     }
 
-    public Product(int id, String name, Category category, Float price, String image, int quantity) {
-        this.id = id;
+    public Product(String name, int category, float price, String image, int qty) {
         this.name = name;
-        this.category = category;
+        this.idCart = category;
         this.price = price;
         this.image = image;
-        this.quantity = quantity;
+        this.quantity = qty;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public int getId() {
@@ -55,6 +62,7 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+        this.setIdCart(category.getcId());
     }
 
     public float getPrice() {
@@ -81,21 +89,14 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getStock() {
-        return stock;
+    public int getIdCart() {
+        return idCart;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setIdCart(int idCart) {
+        this.idCart = idCart;
     }
 
-    public int getIdCat() {
-        return idCat;
-    }
-
-    public void setIdCat(int idCat) {
-        this.idCat = idCat;
-    }
 
     @Override
     public String toString() {
@@ -106,8 +107,8 @@ public class Product {
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", quantity=" + quantity +
-                ", stock=" + stock +
-                ", idCat=" + idCat +
+                ", idCart=" + idCart +
                 '}';
     }
+
 }
