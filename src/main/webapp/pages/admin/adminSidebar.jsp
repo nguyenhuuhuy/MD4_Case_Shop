@@ -26,7 +26,7 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item active">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="/product">
       <i class="fas fa-fw fa-table"></i>
       <span>PRODUCT</span></a>
   </li>
