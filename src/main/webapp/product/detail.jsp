@@ -17,13 +17,13 @@
 <form method="post">
   <label>Name</label><br>
   <input type="text" name="name" value="${requestScope["product"].getName()}" ><br>
-  <label>category</label><br>
+  <label>Category</label><br>
   <input type="text" name="idCategory" value="${requestScope["product"].category.cName}" ><br>
-  <label>price</label><br>
+  <label>Price</label><br>
   <input type="text" name="price" value="${requestScope["product"].getPrice()}" ><br>
-  <label>image</label><br>
+  <label>Image</label><br>
   <input type="text" name="image" value="${requestScope["product"].getImage()}" ><br>
-  <label>quantity</label><br>
+  <label>Quantity</label><br>
   <input type="text" name="qty" value="${requestScope["product"].getQuantity()}" ><br>
 </form>
 </body>

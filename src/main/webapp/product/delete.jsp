@@ -28,10 +28,10 @@
     <input type="text" name="image" value="${requestScope["product"].getImage()}" ><br>
     <label>quantity</label><br>
     <input type="text" name="qty" value="${requestScope["product"].getQuantity()}" ><br>
-    <p>ARE YOU SURE DELETE</p>
-    <button>YES</button>
+    <p>ARE YOU SURE DELETE ?</p>
+    <a href=""></a><button>YES</button>
 </form>
-<a href="/product"><button>NO / BACK </button></a>
+<a href="product"><button>NO / BACK </button></a>
 </body>
 </html>
 

@@ -12,8 +12,8 @@
   <title>Title</title>
 </head>
 <body>
-<h1>create product</h1>
-<a href="/product/list.jsp">back menu</a>
+<h1>CREATE PRODUCT</h1>
+<a href="/product/list.jsp">BACK</a>
 <c:if test='${requestScope["message"] != null}'>
   <span class="message">${requestScope["message"]}</span>
 </c:if>

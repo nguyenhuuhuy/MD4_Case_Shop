@@ -18,8 +18,8 @@
 <form method="post">
   <label>Name</label><br>
   <p value="${requestScope["category"].getcName()}"></p><br>
-  <p>ARE YOU SURE DELETE</p>
-  <a href="/"></a><button>YES</button>
+  <p>ARE YOU SURE DELETE ?</p>
+  <a></a><button>YES</button>
 </form>
 <a href="category"><button>NO / BACK</button></a>
 </body>
