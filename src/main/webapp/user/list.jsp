@@ -23,6 +23,7 @@
     <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
           integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top">
@@ -236,7 +237,7 @@
                             </a>
                         </div>
                     </li>
-
+                    <li><a href="/user?action=logout"><i class="fa-solid fa-right-from-bracket" style="margin-top: 15px;color: black;font-size: 35px"></i></a></li>
                 </ul>
 
             </nav>
@@ -271,10 +272,10 @@
                         </td>
                         <td>${user.roleSet}</td>
                         <td>
-                            <a href="user?action=edit&id=${user.id}">Edit</a>
+                            <a href="user?action=edit&id=${user.id}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                         <td>
-                            <a href="user?action=delete&id=${user.id}">Delete</a>
+                            <a href="user?action=delete&id=${user.id}"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                 </c:forEach>

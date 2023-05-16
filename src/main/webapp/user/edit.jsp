@@ -1,20 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: nguye
-  Date: 5/16/2023
-  Time: 11:51 AM
+  User: icom
+  Date: 5/15/2023
+  Time: 11:00 AM
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <title>Title</title>
   <!-- Custom fonts for this template -->
   <link rel="stylesheet" href="../../assets/css/all.min.css">
@@ -29,7 +23,6 @@
   <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body id="page-top">
@@ -51,18 +44,18 @@
         </form>
         <!-- Topbar Search -->
         <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="post">
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
           <div class="input-group">
             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2" name="search">
+                   aria-label="Search" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">
+              <button class="btn btn-primary" type="button">
                 <i class="fas fa-search fa-sm"></i>
               </button>
             </div>
           </div>
         </form>
-        <a href="product?action=create" type="button" class="btn btn-success m-3">CREATE PRODUCT</a>
+
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">
 
@@ -243,37 +236,31 @@
               </a>
             </div>
           </li>
-        <li><a href="/user?action=logout"><i class="fa-solid fa-right-from-bracket" style="margin-top: 15px;color: black;font-size: 35px"></i></a></li>
 
         </ul>
+
       </nav>
       <!-- End of Topbar -->
 
+      <!-- Begin Page Content -->
+      <form method="post" style="margin-left: 400px">
+        <p>Id:</p>
+        <input type="text" name="id" value="${requestScope['userEdit'].id}" disabled>
+        <p>Name:</p>
+        <input type="text" name="name" value="${requestScope['userEdit'].name}">
+        <p>Email:</p>
+        <input type="text" name="email" value="${requestScope['userEdit'].email}">
+        <p>Password:</p>
+        <input type="text" name="password" value="${requestScope['userEdit'].password}">
+        <br><br>
+        <button type="submit" class="btn btn-success m-3">Submit</button>
+        <a href="user">
+          <button type="button" class="btn btn-danger">
+            Back
+          </button>
+        </a>
       </form>
-      <table class="table table-striped table-hover text-center">
-        <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>category</th>
-          <th>price</th>
-          <th>image</th>
-          <th>quantity</th>
-          <th>edit</th>
-          <th>delete</th>
-        </tr>
-        <c:forEach var="pr" items='${requestScope["productList"]}'>
-          <tr>
-            <td>${pr.id}</td>
-            <td><a href="product?action=detail&id=${pr.id}">${pr.name}</a></td>
-            <td>${pr.category.cName}</td>
-            <td>${pr.price}</td>
-            <td><img width="80" height="80" src="${pr.image}" alt=""></td>
-            <td>${pr.quantity}</td>
-            <td><a href="product?action=edit&id=${pr.id}" type="button" class="btn btn-success">Edit</a></td>
-            <td><a href="product?action=delete&id=${pr.id}" type="button" class="btn btn-danger">Delete</a></td>
-          </tr>
-        </c:forEach>
-      </table>
+
       <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->

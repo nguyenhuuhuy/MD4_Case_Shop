@@ -23,6 +23,7 @@ import java.util.Set;
 public class UserController extends HttpServlet {
     IUserService userService = new UserServiceIMPL();
     IRoleService roleService = new RoleServiceIMPL();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -41,19 +42,28 @@ public class UserController extends HttpServlet {
             case "logout":
                 logOut(request, response);
                 break;
+            case "edit":
+                try {
+                    formEdit(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            case "delete":
+                formDelete(request, response);
+                break;
             case "avatar":
-                showFormChangeAvatar(request,response);
+                showFormChangeAvatar(request, response);
                 break;
             default:
                 try {
-                    listUser(request,response);
+                    listUser(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
         }
 
     }
-
 
 
     @Override
@@ -72,13 +82,19 @@ public class UserController extends HttpServlet {
                 case "login":
                     actionLogin(request, response);
                     break;
+                case "edit":
+                    actionEdit(request, response);
+                    break;
+                case "delete":
+                    actionDelete(request, response);
+                    break;
                 case "avatar":
-                    actionUpdateAvatar(request,response);
+                    actionUpdateAvatar(request, response);
                     break;
                 default:
-                    listUser(request,response);
+                    listUser(request, response);
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -94,21 +110,56 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
     // hiện danh sách user
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         List<User> userList = userService.findAll();
         request.setAttribute("listUser", userList);
-       RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+    // hien thong tin can sua
+    private void formEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User userEdit = userService.findById(id);
+        request.setAttribute("userEdit", userEdit);
+        request.getRequestDispatcher("user/edit.jsp").forward(request, response);
+    }
+
+    // sua user
+    private void actionEdit(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User user = userService.findById(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        userService.save(user);
+        listUser(request, response);
+    }
+
+    private void formDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("id", id);
+
+        request.getRequestDispatcher("user/delete.jsp").forward(request, response);
+    }
+
+    private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        userService.deleteById(id);
+        listUser(request, response);
+    }
+
     private void actionRegister(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String name = request.getParameter("name");
         String username = request.getParameter("username");
@@ -163,24 +214,26 @@ public class UserController extends HttpServlet {
     private void showFormLogin(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/login.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    // điều hướng tới trang admin đang đợi trang
-    private void showFormAdmin(HttpServletRequest request,HttpServletResponse response){
+
+    // điều hướng tới trang admin
+    private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/adminManage.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
     // Đăng Nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String username = request.getParameter("username");
@@ -191,9 +244,9 @@ public class UserController extends HttpServlet {
             session.setAttribute("userLogin", user);
             Set<Role> roleSet = user.getRoleSet();
             List<Role> roles = new ArrayList<>(roleSet);
-            session.setAttribute("role",roles.get(0).getName());
+            session.setAttribute("role", roles.get(0).getName());
             for (int i = 0; i < roles.size(); i++) {
-                if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM){
+                if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM) {
                     try {
                         response.sendRedirect("pages/admin/adminManage.jsp");
                     } catch (IOException e) {
@@ -214,10 +267,11 @@ public class UserController extends HttpServlet {
             showFormLogin(request, response);
         }
     }
+
     // đăng xuất
     private void logOut(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        if (session.getAttribute("userLogin")!=null){
+        if (session.getAttribute("userLogin") != null) {
             session.removeAttribute("userLogin");
             session.invalidate();
         }

@@ -13,7 +13,14 @@ public class User {
     private boolean status;
     Set<Role> roleSet = new HashSet<>();
 
-    public User() {
+    public User(int id, String name, String username, String email, String password, String avatar, boolean status) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.status = status;
     }
 
     public User(int id, String name, String username, String email, String password, String avatar, boolean status, Set<Role> roleSet) {
