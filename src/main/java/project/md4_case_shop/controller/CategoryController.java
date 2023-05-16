@@ -63,6 +63,8 @@ public class CategoryController extends HttpServlet {
                 case "delete":
                     actionDelete(req, resp);
                     break;
+                default:
+                    actionSearchProduct(req, resp);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -120,6 +122,16 @@ public class CategoryController extends HttpServlet {
         request.setAttribute("message", "edit category success");
         RequestDispatcher dispatcher = request.getRequestDispatcher("category/edit.jsp");
         dispatcher.forward(request, response);
+    }
+    private void actionSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("search");
+        List<Category> categoryListSearch = categoryService.findByName(name);
+        request.setAttribute("categoryList", categoryListSearch);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("category/list.jsp");
+        dispatcher.forward(request, response);
+
+
     }
 
 }
