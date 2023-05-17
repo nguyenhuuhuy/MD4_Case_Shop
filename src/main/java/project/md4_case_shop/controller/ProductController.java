@@ -117,14 +117,13 @@ public class ProductController extends HttpServlet {
 
     private void actionSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("search");
-        List<Product> categoryListSearch = productService.findByCategoryAndByName(name);
-        request.setAttribute("productList", categoryListSearch);
+        List<Product> productListSearch = productService.findByCategoryAndByName(name);
+        request.setAttribute("productList", productListSearch);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
         dispatcher.forward(request, response);
-
-
     }
+
 
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
