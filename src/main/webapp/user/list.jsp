@@ -12,13 +12,10 @@
     <title>Admin - Users</title>
     <link rel="shortcut icon" type="image/icon" href="../../assets/logo/favicon.png"/>
     <link rel="stylesheet" href="../../assets/css/all.min.css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link href="../../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -40,13 +37,12 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables User Manage</h6>
+                        <h4 class="m-0 font-weight-bold text-primary">DataTables User Manage</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -90,16 +86,132 @@
                                             </c:forEach>
                                         </td>
                                         <td>
-                                            <a href="user?action=edit&id=${user.id}">
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            <a type="button" class="dropdown-item" data-toggle="modal"
+                                               data-target="#logoutModal${user.id}">
+                                                <i class="fa-sharp fa-solid fa-pen-to-square"
+                                                   style="color: #2a65b2;"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="user?action=delete&id=${user.id}">
+                                            <a type="button" class="dropdown-item" data-toggle="modal"
+                                               data-target="#logoutModal2${user.id}">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
                                     </tr>
+
+                                    <!-- Edit Modal-->
+                                    <div class="modal fade" id="logoutModal${user.id}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+
+                                                <div class="modal-header">
+                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                        <h5 class="modal-title" id="exampleModalLabel1">
+                                                            Ready edit user :
+                                                        </h5>
+                                                        <h5 class="modal-body" style="padding: 4px">ID ${user.id}
+                                                            ?</h5>
+                                                    </div>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true" style="color: red">x</span>
+                                                    </button>
+                                                </div>
+
+                                                <div align="center">
+                                                    <h1>EDIT USER</h1>
+                                                    <form action="/user?action=edit&id=${user.id}"
+                                                          method="post">
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
+
+                                                        <input type="text" name="id" value="${user.id}" disabled>
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
+
+                                                        <input type="text" name="name" value="${user.name}">
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
+
+                                                        <input type="text" name="email" value="${user.email}">
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Password:</p>
+
+                                                        <input type="text" name="password" value="${user.password}">
+
+                                                        <c:if test='${requestScope["message"] != null}'>
+                                                            <span class="message">${requestScope["message"]}</span>
+                                                        </c:if> <br>
+                                                        <button type="submit" class="btn btn-success m-3">
+                                                            EDIT
+                                                        </button>
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">Cancel
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Edit Modal-->
+
+                                    <!-- Delete Modal-->
+                                    <div class="modal fade" id="logoutModal2${user.id}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel2"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                        <h5 class="modal-title" id="exampleModalLabel2">
+                                                            Ready delete user :
+                                                        </h5>
+                                                        <h5 class="modal-body" style="padding: 4px">ID ${user.id}
+                                                            ?</h5>
+                                                    </div>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true" style="color: red">x</span>
+                                                    </button>
+                                                </div>
+
+                                                <div align="center">
+                                                    <h1>DELETE USER</h1>
+                                                    <form action="/user?action=delete&id=${user.id}"
+                                                          method="post">
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
+
+                                                        <input type="text" name="id" value="${user.id}" disabled>
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
+
+                                                        <input type="text" name="name" value="${user.name}" disabled>
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
+
+                                                        <input type="text" name="email" value="${user.email}" disabled>
+
+                                                        <c:if test='${requestScope["message"] != null}'>
+                                                            <span class="message">${requestScope["message"]}</span>
+                                                        </c:if> <br>
+                                                        <p style="margin-bottom: 1px; margin-top: 17px">
+                                                            Are you sure you want to delete ?</p><br>
+                                                        <button type="submit" class="btn btn-danger m-2">
+                                                            Delete
+                                                        </button>
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">Cancel
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Delete Modal-->
+
                                 </c:forEach>
                                 </tbody>
                             </table>

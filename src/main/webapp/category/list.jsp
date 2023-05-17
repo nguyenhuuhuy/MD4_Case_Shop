@@ -12,10 +12,8 @@
     <title>Admin - Category</title>
     <link rel="shortcut icon" type="image/icon" href="../../assets/logo/favicon.png"/>
     <link rel="stylesheet" href="../../assets/css/all.min.css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    <link            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -40,35 +38,17 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
-
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div>
                         <div class="card-header py-3" style="display: flex; justify-content: space-between;">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                DataTables User Manage</h6>
-                            <!-- Topbar Search -->
-                            <%--                            <form--%>
-                            <%--                                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"--%>
-                            <%--                                    method="post">--%>
-                            <%--                                <div class="input-group">--%>
-                            <%--                                    <input type="text" class="form-control bg-light border-0 small"--%>
-                            <%--                                           placeholder="Search for..."--%>
-                            <%--                                           aria-label="Search" aria-describedby="basic-addon2" name="search">--%>
-                            <%--                                    <div class="input-group-append">--%>
-                            <%--                                        <button class="btn btn-primary" type="submit">--%>
-                            <%--                                            <i class="fas fa-search fa-sm"></i>--%>
-                            <%--                                        </button>--%>
-                            <%--                                    </div>--%>
-                            <%--                                </div>--%>
-                            <%--                            </form>--%>
+                            <h4 class="m-0 font-weight-bold text-primary">
+                                DataTables Category Manage</h4>
                             <a href="category?action=create" type="text" class="btn btn-success m-0"
                             > Create Category </a>
-
                         </div>
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -92,20 +72,15 @@
                                 <tbody>
                                 <c:forEach var="cate" items='${requestScope["categoryList"]}'>
                                     <tr align="center">
-
                                         <td>${cate.cId}</td>
                                         <td>${cate.cName}</td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
                                                data-target="#logoutModal${cate.cId}"
                                                href="category?action=edit&id=${cate.cId}">
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                <i class="fa-sharp fa-solid fa-pen-to-square"
+                                                   style="color: #2a65b2;"></i>
                                             </a>
-
-                                                <%--                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">--%>
-                                                <%--                                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>--%>
-                                                <%--                                                Logout--%>
-                                                <%--                                            </a>--%>
                                         </td>
                                         <td>
                                             <a type="button"
@@ -113,39 +88,44 @@
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
-
                                     </tr>
-
-                                    <!-- Logout Modal-->
+                                    <!-- Edit Modal-->
                                     <div class="modal fade" id="logoutModal${cate.cId}" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
+
+
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel1">Ready to Leave?</h5>
+                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                        <h5 class="modal-title" id="exampleModalLabel1">
+                                                            Ready edit category :
+                                                        </h5>
+                                                        <h5 class="modal-body" style="padding: 4px">ID ${cate.cId}
+                                                            ?</h5>
+                                                    </div>
                                                     <button class="close" type="button" data-dismiss="modal"
                                                             aria-label="Close">
-                                                        <span aria-hidden="true">X</span>
+                                                        <span aria-hidden="true" style="color: red">x</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">${cate.cId} Day la ID</div>
-                                                <div class="modal-footer">
-                                                    <div align="center">
-                                                        <h1>CREATE CATEGORY</h1>
-                                                        <form action="/category?action=edit&id=${cate.cId}" method="post">
-                                                            <label>Category name</label>&ensp;
-                                                            <input type="text" name="name" value="${cate.cName}"><br>
-                                                            <c:if test='${requestScope["message"] != null}'>
-                                                                <span class="message">${requestScope["message"]}</span>
-                                                            </c:if> <br>
-                                                            <button type="submit" class="btn btn-success m-3">EDIT
-                                                            </button>
-                                                            <button class="btn btn-secondary" type="button"
-                                                                    data-dismiss="modal">Cancel
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                <div align="center">
+                                                    <h1>EDIT CATEGORY</h1>
+                                                    <form action="/category?action=edit&id=${cate.cId}"
+                                                          method="post">
+                                                        <label>Category name</label>&ensp;
+                                                        <input type="text" name="name" value="${cate.cName}">
+                                                        <c:if test='${requestScope["message"] != null}'>
+                                                            <span class="message">${requestScope["message"]}</span>
+                                                        </c:if> <br>
+                                                        <button type="submit" class="btn btn-success m-3">
+                                                            EDIT
+                                                        </button>
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">Cancel
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,7 +154,6 @@
     <!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
