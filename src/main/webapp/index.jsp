@@ -7,5 +7,6 @@
 </head>
 <body>
 <% response.sendRedirect("home");%>
+<h1>alo 123</h1>
 </body>
 </html>
