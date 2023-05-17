@@ -252,7 +252,7 @@
                     <input type="text" name="idCategory" value="${requestScope["product"].category.cId}" ><br>
                     <label>price</label><br>
                     <input type="text" name="price" value="${requestScope["product"].getPrice()}" ><br>
-                    <label>image</label><br>
+                    <label>AVATAR</label><br>
                     <img src="${requestScope["product"].getImage()}" alt="" style="width: 100px;height: 100px">
                     <br>
                     <progress value="0" max="100" id="uploader">0%</progress>
