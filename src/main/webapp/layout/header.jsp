@@ -49,7 +49,7 @@
                             <a href="#"><span class="lnr lnr-cog"></span></a>
                         </li><!--/.search-->
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="${sessionScope['userLogin'] != null ? "cart" : "user?action=login"}" class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="lnr lnr-cart"></span>
                                 <span class="badge badge-bg-1">2</span>
                             </a>

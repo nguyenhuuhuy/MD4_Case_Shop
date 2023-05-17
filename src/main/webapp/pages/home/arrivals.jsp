@@ -28,7 +28,7 @@
                                 <div class="new-arrival-cart">
                                     <p>
                                         <span class="lnr lnr-cart"></span>
-                                        <a href="#">add <span>to </span> cart</a>
+                                        <a href="cart?action=add&id=${pr.id}&qty=1">add <span>to </span> cart</a>
                                     </p>
                                     <p class="arrival-review pull-right">
                                         <span class="lnr lnr-heart"></span>
