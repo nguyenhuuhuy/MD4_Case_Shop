@@ -33,7 +33,7 @@
   <hr class="sidebar-divider">
 
   <li class="nav-item active">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="cart?action=manager">
       <i class="fas fa-fw fa-table"></i>
       <span>LIST ORDER</span></a>
   </li>
