@@ -9,7 +9,7 @@
 <% response.sendRedirect("home");%>
 
 <h1>alo</h1>
-=======
+
 
 </body>
 </html>
