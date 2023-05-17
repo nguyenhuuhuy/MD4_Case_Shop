@@ -143,7 +143,7 @@ public class ProductController extends HttpServlet {
         String image = request.getParameter("image");
         int qty = Integer.parseInt(request.getParameter("qty"));
         product.setName(name);
-        product.setIdCart(idCategory);
+        product.setIdCategory(idCategory);
         product.setPrice(price);
         product.setImage(image);
         product.setQuantity(qty);

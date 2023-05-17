@@ -17,11 +17,11 @@ public class ProductServiceIMPL implements IProductService{
     private Connection connection = ConnectMySQL.getConnection();
     private ICategoryService categoryService = new CategoryServiceIMPL();
     private static final String LIST_PRODUCT = "select * from product";
-    private static final String CREATE_PRODUCT = "INSERT INTO product(name,idcart,price,img,quantity)values (?,?,?,?,?);";
-    private static final String UPDATE_PRODUCT = "UPDATE product SET name=?,idcart=?,price=?,img=?,quantity=? where id=?;";
+    private static final String CREATE_PRODUCT = "INSERT INTO product(name,idcategory,price,img,quantity)values (?,?,?,?,?);";
+    private static final String UPDATE_PRODUCT = "UPDATE product SET name=?,idcategory=?,price=?,img=?,quantity=? where id=?;";
     private static final String PRODUCT_BY_ID = "SELECT * FROM product where id = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM product WHERE id=?;";
-    private static final String SEARCH_BY_CATE = "select * from product pr join category ca on pr.idcart = ca.id where ca.name  like ? or pr.name like ?; ";
+    private static final String SEARCH_BY_CATE = "select * from product pr join category ca on pr.idcategory = ca.id where ca.name  like ? or pr.name like ?; ";
 
 
     @Override
@@ -33,7 +33,7 @@ public class ProductServiceIMPL implements IProductService{
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                Category category = categoryService.findById(rs.getInt("idcart"));
+                Category category = categoryService.findById(rs.getInt("idCategory"));
 //                String idCate = String.valueOf(categoryService.findById(id));
                 Float price = rs.getFloat("price");
                 String img = rs.getString("img");
@@ -56,7 +56,7 @@ public class ProductServiceIMPL implements IProductService{
             if (findById(product.getId()) == null) {
                 PreparedStatement preparedStatement = connection.prepareStatement(CREATE_PRODUCT);
                 preparedStatement.setString(1, product.getName());
-                preparedStatement.setInt(2, product.getIdCart());
+                preparedStatement.setInt(2, product.getIdCategory());
                 preparedStatement.setFloat(3, product.getPrice());
                 preparedStatement.setString(4, product.getImage());
                 preparedStatement.setInt(5, product.getQuantity());
@@ -64,7 +64,7 @@ public class ProductServiceIMPL implements IProductService{
             } else {
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT);
                 preparedStatement.setString(1, product.getName());
-                preparedStatement.setInt(2, product.getIdCart());
+                preparedStatement.setInt(2, product.getIdCategory());
                 preparedStatement.setFloat(3, product.getPrice());
                 preparedStatement.setString(4, product.getImage());
                 preparedStatement.setInt(5, product.getQuantity());
@@ -86,7 +86,7 @@ public class ProductServiceIMPL implements IProductService{
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
-                int idCate = resultSet.getInt("idcart");
+                int idCate = resultSet.getInt("idCategory");
                 float price = resultSet.getFloat("price");
                 String img = resultSet.getString("img");
                 int quantity = resultSet.getInt("quantity");
@@ -127,7 +127,7 @@ public class ProductServiceIMPL implements IProductService{
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                Category category = categoryService.findById(rs.getInt("idcart"));
+                Category category = categoryService.findById(rs.getInt("idCategory"));
                 float price = rs.getFloat("price");
                 String img = rs.getString("img");
                 int quantity = rs.getInt("quantity");
