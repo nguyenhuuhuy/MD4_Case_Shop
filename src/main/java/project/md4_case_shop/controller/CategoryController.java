@@ -1,6 +1,7 @@
 package project.md4_case_shop.controller;
 
 import project.md4_case_shop.model.Category;
+import project.md4_case_shop.model.Product;
 import project.md4_case_shop.service.category.CategoryServiceIMPL;
 import project.md4_case_shop.service.category.ICategoryService;
 
@@ -87,12 +88,15 @@ public class CategoryController extends HttpServlet {
         String name = req.getParameter("name");
         Category category = new Category(name);
         categoryService.save(category);
-        req.setAttribute("message", "create success");
+        req.setAttribute("message", "CREATE SUCCESS !!!");
         RequestDispatcher dispatcher = req.getRequestDispatcher("category/create.jsp");
         dispatcher.forward(req, resp);
     }
 
-    public void showFormDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void showFormDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Category category = categoryService.findById(id);
+        req.setAttribute("category", category);
         RequestDispatcher dispatcher = req.getRequestDispatcher("category/delete.jsp");
         dispatcher.forward(req, resp);
     }
@@ -100,7 +104,7 @@ public class CategoryController extends HttpServlet {
     public void actionDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(req.getParameter("id"));
         categoryService.deleteById(id);
-        req.setAttribute("message", "delete category success");
+        req.setAttribute("message", "DELETE CATEGORY SUCCESS !!!");
         RequestDispatcher dispatcher = req.getRequestDispatcher("category/delete.jsp");
         dispatcher.forward(req, resp);
     }
@@ -119,7 +123,7 @@ public class CategoryController extends HttpServlet {
         String name = request.getParameter("name");
         category.setcName(name);
         categoryService.save(category);
-        request.setAttribute("message", "edit category success");
+        request.setAttribute("message", "EDIT CATEGORY SUCCESS !!!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("category/edit.jsp");
         dispatcher.forward(request, response);
     }
