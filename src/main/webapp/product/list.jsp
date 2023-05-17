@@ -252,14 +252,14 @@
       </form>
       <table class="table table-striped table-hover text-center">
         <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>category</th>
-          <th>price</th>
-          <th>image</th>
-          <th>quantity</th>
-          <th>edit</th>
-          <th>delete</th>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>CATEGORY</th>
+          <th>PRICE</th>
+          <th>IMAGE</th>
+          <th>QUANTITY</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
         </tr>
         <c:forEach var="pr" items='${requestScope["productList"]}'>
           <tr>
@@ -269,8 +269,12 @@
             <td>${pr.price}</td>
             <td><img width="80" height="80" src="${pr.image}" alt=""></td>
             <td>${pr.quantity}</td>
-            <td><a href="product?action=edit&id=${pr.id}" type="button" class="btn btn-success">Edit</a></td>
-            <td><a href="product?action=delete&id=${pr.id}" type="button" class="btn btn-danger">Delete</a></td>
+            <td>
+              <a href="product?action=edit&id=${pr.id}" type="button" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+            </td>
+            <td>
+              <a href="product?action=delete&id=${pr.id}" type="button" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
+            </td>
           </tr>
         </c:forEach>
       </table>
