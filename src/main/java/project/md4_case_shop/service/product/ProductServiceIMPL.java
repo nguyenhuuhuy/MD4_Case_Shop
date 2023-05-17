@@ -27,9 +27,8 @@ public class ProductServiceIMPL implements IProductService{
     @Override
     public List<Product> findAll()  {
         List<Product> productList = new ArrayList<>();
-        PreparedStatement ps = null;
         try {
-            ps = connection.prepareStatement(LIST_PRODUCT);
+            PreparedStatement ps = connection.prepareStatement(LIST_PRODUCT);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

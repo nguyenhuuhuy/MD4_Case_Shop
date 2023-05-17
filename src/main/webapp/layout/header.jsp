@@ -24,15 +24,18 @@
              data-minus-value-mobile="55" data-speed="1000">
 
             <!-- Start Top Search -->
-            <div class="top-search">
-                <div class="container">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Search">
-                        <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            <form method="post">
+                <div class="top-search">
+                    <div class="container">
+                        <div class="input-group">
+                            <span class="input-group-addon"><button type="submit"><i class="fa fa-search"></i></button></span>
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
             <!-- End Top Search -->
 
             <div class="container">
@@ -113,7 +116,7 @@
                         <li class="scroll"><a href="#blog">blog</a></li>
                         <li class="scroll"><a href="#newsletter">contact</a></li>
                         <c:if test='${sessionScope["userLogin"]!=null}'>
-                            <li><a href="">welcome ${sessionScope["userLogin"].getName()}</a></li>
+                            <li><a href="/user?action=editUserLogin&id=${sessionScope['userLogin'].getId()}">welcome ${sessionScope["userLogin"].getName()}</a></li>
                             <li><a href="/user?action=logout">Log Out</a></li>
                         </c:if>
                         <c:if test='${sessionScope["userLogin"]==null}'>

@@ -52,8 +52,12 @@ public class UserController extends HttpServlet {
             case "delete":
                 formDelete(request, response);
                 break;
-            case "avatar":
-                showFormChangeAvatar(request, response);
+            case "editUserLogin":
+                try {
+                    formEditUserLogin(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 try {
@@ -88,8 +92,8 @@ public class UserController extends HttpServlet {
                 case "delete":
                     actionDelete(request, response);
                     break;
-                case "avatar":
-                    actionUpdateAvatar(request, response);
+                case "editUserLogin":
+                    actionEditUserLogin(request,response);
                     break;
                 default:
                     listUser(request, response);
@@ -98,7 +102,11 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
+    // trang chủ
+    private void home(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/home/home.jsp");
+        dispatcher.forward(request,response);
+    }
     // Điều hướng tới trang register
     private void showFormRegister(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/register.jsp");
@@ -146,7 +154,29 @@ public class UserController extends HttpServlet {
         userService.save(user);
         listUser(request, response);
     }
-
+    // hiện thông tin userLogin
+    private void formEditUserLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User userEditLogin = userService.findById(id);
+        request.setAttribute("userEditLogin", userEditLogin);
+        request.getRequestDispatcher("user/editUserLogin.jsp").forward(request, response);
+    }
+    private void actionEditUserLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("nameLogin");
+        String email = request.getParameter("emailLogin");
+        String password = request.getParameter("passwordLogin");
+        User user = userService.findById(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+        userService.save(user);
+        if (session.getAttribute("userLogin") != null){
+            session.setAttribute("userLogin",user);
+        }
+        home(request,response);
+    }
     private void formDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id", id);
@@ -221,19 +251,6 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
-    // điều hướng tới trang admin
-    private void showFormAdmin(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("pages/admin/adminManage.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     // Đăng Nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String username = request.getParameter("username");
