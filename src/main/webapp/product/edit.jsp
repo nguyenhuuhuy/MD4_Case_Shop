@@ -252,7 +252,7 @@
                     <input type="text" name="idCategory" value="${requestScope["product"].category.cId}" ><br>
                     <label>price</label><br>
                     <input type="text" name="price" value="${requestScope["product"].getPrice()}" ><br>
-                    <label>AVATAR</label><br>
+                    <label>IMAGE</label><br>
                     <img src="${requestScope["product"].getImage()}" alt="" style="width: 100px;height: 100px">
                     <br>
                     <progress value="0" max="100" id="uploader">0%</progress>
@@ -268,6 +268,7 @@
 
                 </form>
                 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+                <br>
                 <script type="text/javascript">
                     const firebaseConfig = {
                         apiKey: "AIzaSyBwdd6mWXQFS-UvzftRy-jhi4dmjUqhLhs",

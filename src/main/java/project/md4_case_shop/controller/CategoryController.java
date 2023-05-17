@@ -31,9 +31,9 @@ public class CategoryController extends HttpServlet {
                 case "create":
                     showFormCreate(req,resp);
                     break;
-                case "edit":
-                    showFormEdit(req, resp);
-                    break;
+//                case "edit":
+//                    showFormEdit(req, resp);
+//                    break;
                 case "delete":
                     showFormDelete(req, resp);
                     break;
@@ -124,7 +124,7 @@ public class CategoryController extends HttpServlet {
         category.setcName(name);
         categoryService.save(category);
         request.setAttribute("message", "EDIT CATEGORY SUCCESS !!!");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("category/edit.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/admin/adminManage.jsp");
         dispatcher.forward(request, response);
     }
     private void actionSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
