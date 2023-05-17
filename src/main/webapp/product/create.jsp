@@ -249,7 +249,6 @@
           <label>PRUDUCT NAME</label><br>
           <input type="text" name="name"><br>
           <label>CATEGORY</label><br>
-          <select name="" id=""></select>
           <input type="text" name="idCategory"><br>
           <label>PRICE</label><br>
           <input type="text" name="price"><br>
