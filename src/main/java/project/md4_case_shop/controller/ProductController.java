@@ -129,7 +129,7 @@ public class ProductController extends HttpServlet {
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         productService.deleteById(id);
-        request.setAttribute("message", "delete students success");
+        request.setAttribute("message", "DELETE PRODUCT SUCCESS !!!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/delete.jsp");
         dispatcher.forward(request, response);
     }
@@ -143,12 +143,12 @@ public class ProductController extends HttpServlet {
         String image = request.getParameter("image");
         int qty = Integer.parseInt(request.getParameter("qty"));
         product.setName(name);
-        product.setIdCart(idCategory);
+        product.setIdCategory(idCategory);
         product.setPrice(price);
         product.setImage(image);
         product.setQuantity(qty);
         productService.save(product);
-        request.setAttribute("message", "edit students success");
+        request.setAttribute("message", "EDIT PRODUCT SUCCESS !!!");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/edit.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -162,7 +162,7 @@ public class ProductController extends HttpServlet {
         Product product = new Product(name, idCategory, price, image, qty);
         productService.save(product);
 
-        request.setAttribute("message", "Created product success");
+        request.setAttribute("message", "CREATED PRODUCT SUCCESS !!!");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
         dispatcher.forward(request, response);

@@ -9,7 +9,7 @@ public class Product {
     private String image;
     private int quantity;
     private int stock;
-    private int idCart;
+    private int idCategory;
 
     public Product() {
     }
@@ -21,12 +21,12 @@ public class Product {
         this.price = price;
         this.image = image;
         this.quantity = quantity;
-        this.setIdCart(category.getcId());
+        this.setIdCategory(category.getcId());
     }
 
     public Product(String name, int category, float price, String image, int qty) {
         this.name = name;
-        this.idCart = category;
+        this.idCategory = category;
         this.price = price;
         this.image = image;
         this.quantity = qty;
@@ -62,7 +62,7 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
-        this.setIdCart(category.getcId());
+        this.setIdCategory(category.getcId());
     }
 
     public float getPrice() {
@@ -89,12 +89,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getIdCart() {
-        return idCart;
+    public int getIdCategory() {
+        return idCategory;
     }
 
-    public void setIdCart(int idCart) {
-        this.idCart = idCart;
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
 
@@ -107,7 +107,7 @@ public class Product {
                 ", price=" + price +
                 ", image='" + image + '\'' +
                 ", quantity=" + quantity +
-                ", idCart=" + idCart +
+                ", idCategory=" + idCategory +
                 '}';
     }
 
