@@ -250,4 +250,12 @@ public class CartServiceIMPL implements ICartService{
             ps.executeUpdate();
         }
     }
+    public float totalCart(List<Cart> listCart) {
+        List<Cart>  list = listCart;
+        int total = 0;
+        for (int i = 0; i < listCart.size(); i++) {
+           total+= listCart.get(i).getTotal();
+        }
+        return total;
+    }
 }

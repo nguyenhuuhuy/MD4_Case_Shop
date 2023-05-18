@@ -24,4 +24,5 @@ public interface ICartService extends IGenericService {
     List<Cart> findCartByStatus(CartStatus status) throws SQLException;
     void setCreatedTime(int id) throws SQLException;
     void setChangedTime(int id) throws SQLException;
+    float totalCart(List<Cart> cartList);
 }

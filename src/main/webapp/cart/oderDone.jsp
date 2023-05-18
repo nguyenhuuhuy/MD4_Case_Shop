@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: icom
+  User: son
   Date: 5/15/2023
   Time: 11:00 AM
   To change this template use File | Settings | File Templates.
@@ -9,14 +9,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Admin Manage</title>
+    <title>Admin - Category</title>
     <link rel="shortcut icon" type="image/icon" href="../../assets/logo/favicon.png"/>
-    <!-- Custom fonts for this template -->
     <link rel="stylesheet" href="../../assets/css/all.min.css">
-    <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
-
+    <link            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+                     rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -33,64 +30,55 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-    <jsp:include page="adminSidebar.jsp"></jsp:include>
+    <jsp:include page="../pages/admin/adminSidebar.jsp"></jsp:include>
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">
             <!-- Topbar -->
-            <jsp:include page="adminTopbar.jsp"></jsp:include>
+            <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
-
-
+            <c:if test='${requestScope["message"] != null}'>
+                <span class="message">${requestScope["message"]}</span>
+            </c:if>
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                    <div>
+                        <div class="card-header py-3" style="display: flex; justify-content: space-between;">
+                            <h4 class="m-0 font-weight-bold text-primary">
+                                DataTables OderDone Manage</h4>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-hover table-striped " id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr align="center">
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">NAME</th>
+                                    <th scope="col">TOTAL</th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr align="center">
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                                </tfoot>
                                 <tbody>
-                                <tr align="center">
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr align="center">
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                </tr>
+                                <c:forEach items="${requestScope['cartList']}" var="cart">
+                                    <tr align="center">
+                                        <td>${cart.id}</td>
+                                        <td>${cart.user.name}</td>
+                                        <td>${cart.getTotal()}</td>
+                                    </tr>
+                                </c:forEach>
+                                <tfoot>
 
+                            </tfoot>
+                                <tr align="center">
+                                    <th>TOTAL ALL IN</th>
+                                    <th></th>
+                                    <c:if test='${requestScope["totalDone"]!=null}'>
+                                        <th>${requestScope["totalDone"]} $</th>
+                                    </c:if>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -114,11 +102,15 @@
     <!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
-
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+
+
 </body>
-<jsp:include page="../../library/bootstrap/bootstrapAdmin.jsp"></jsp:include>
+
+<jsp:include page="../library/bootstrap/bootstrapAdmin.jsp"></jsp:include>
 </html>
+
+
