@@ -152,7 +152,8 @@ public class UserController extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         userService.save(user);
-        listUser(request, response);
+        request.setAttribute("message","Đã Thành Công");
+        listUser(request,response);
     }
     // hiện thông tin userLogin
     private void formEditUserLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -187,6 +188,7 @@ public class UserController extends HttpServlet {
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         userService.deleteById(id);
+        request.setAttribute("message","Xóa Thành Công");
         listUser(request, response);
     }
 

@@ -38,6 +38,9 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
+            <c:if test='${requestScope["message"] != null}'>
+                <span class="message">${requestScope["message"]}</span>
+            </c:if>
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -76,22 +79,25 @@
                                         <td>${cate.cName}</td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#logoutModal${cate.cId}"
-                                               href="category?action=edit&id=${cate.cId}">
+                                               data-target="#logoutModal9${cate.cId}">
                                                 <i class="fa-sharp fa-solid fa-pen-to-square"
                                                    style="color: #2a65b2;"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a type="button"
-                                               href="category?action=delete&id=${cate.cId}">
+<%--                                            <a type="button"--%>
+<%--                                               href="category?action=delete&id=${cate.cId}">--%>
+<%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
+<%--                                            </a>--%>
+                                            <a type="button" class="dropdown-item" data-toggle="modal"
+                                               data-target="#logoutModal2${cate.cId}">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
                                     </tr>
                                     <!-- Edit Modal-->
-                                    <div class="modal fade" id="logoutModal${cate.cId}" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel"
+                                    <div class="modal fade" id="logoutModal9${cate.cId}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel9"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -99,7 +105,7 @@
 
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="exampleModalLabel1">
+                                                        <h5 class="modal-title" id="exampleModalLabel9">
                                                             Ready edit category :
                                                         </h5>
                                                         <h5 class="modal-body" style="padding: 4px">ID ${cate.cId}
@@ -116,9 +122,7 @@
                                                           method="post">
                                                         <label>Category name</label>&ensp;
                                                         <input type="text" name="name" value="${cate.cName}">
-                                                        <c:if test='${requestScope["message"] != null}'>
-                                                            <span class="message">${requestScope["message"]}</span>
-                                                        </c:if> <br>
+                                                         <br>
                                                         <button type="submit" class="btn btn-success m-3">
                                                             EDIT
                                                         </button>
@@ -130,6 +134,54 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- End Edit Modal-->
+                                    <!-- Delete Modal-->
+                                    <div class="modal fade" id="logoutModal2${cate.cId}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel2"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                        <h5 class="modal-title" id="exampleModalLabel2">
+                                                            Ready delete Category :
+                                                        </h5>
+                                                        <h5 class="modal-body" style="padding: 4px">ID ${cate.cId}
+                                                            ?</h5>
+                                                    </div>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true" style="color: red">x</span>
+                                                    </button>
+                                                </div>
+
+                                                <div align="center">
+                                                    <h1>DELETE CATEGORY</h1>
+                                                    <form action="/category?action=delete&id=${cate.cId}"
+                                                          method="post">
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
+
+                                                        <input type="text" name="id" value="${cate.cId}" disabled>
+
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
+
+                                                        <input type="text" name="name" value="${cate.cName}" disabled>
+
+                                                        <br>
+                                                        <p style="margin-bottom: 1px; margin-top: 17px">
+                                                            Are you sure you want to delete ?</p><br>
+                                                        <button type="submit" class="btn btn-danger m-2">
+                                                            Delete
+                                                        </button>
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">Cancel
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Delete Modal-->
                                 </c:forEach>
                                 </tbody>
                             </table>

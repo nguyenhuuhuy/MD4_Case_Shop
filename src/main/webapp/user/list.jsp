@@ -37,6 +37,9 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
+            <c:if test='${requestScope["message"] != null}'>
+                <span class="message">${requestScope["message"]}</span>
+            </c:if>
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -194,9 +197,7 @@
 
                                                         <input type="text" name="email" value="${user.email}" disabled>
 
-                                                        <c:if test='${requestScope["message"] != null}'>
-                                                            <span class="message">${requestScope["message"]}</span>
-                                                        </c:if> <br>
+                                                         <br>
                                                         <p style="margin-bottom: 1px; margin-top: 17px">
                                                             Are you sure you want to delete ?</p><br>
                                                         <button type="submit" class="btn btn-danger m-2">

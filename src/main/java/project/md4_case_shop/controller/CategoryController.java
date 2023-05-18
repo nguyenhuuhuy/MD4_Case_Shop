@@ -105,8 +105,7 @@ public class CategoryController extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         categoryService.deleteById(id);
         req.setAttribute("message", "DELETE CATEGORY SUCCESS !!!");
-        RequestDispatcher dispatcher = req.getRequestDispatcher("category/delete.jsp");
-        dispatcher.forward(req, resp);
+        showListCategory(req,resp);
     }
 
     public void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -124,8 +123,7 @@ public class CategoryController extends HttpServlet {
         category.setcName(name);
         categoryService.save(category);
         request.setAttribute("message", "EDIT CATEGORY SUCCESS !!!");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/admin/adminManage.jsp");
-        dispatcher.forward(request, response);
+        showListCategory(request,response);
     }
     private void actionSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("search");
