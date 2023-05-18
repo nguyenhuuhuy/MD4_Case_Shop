@@ -82,13 +82,13 @@ public class ProductController extends HttpServlet {
         request.getRequestDispatcher("product/list.jsp").forward(request, response);
     }
 
-    private void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException , SQLException {
+    private void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
@@ -129,8 +129,7 @@ public class ProductController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         productService.deleteById(id);
         request.setAttribute("message", "DELETE PRODUCT SUCCESS !!!");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("product/delete.jsp");
-        dispatcher.forward(request, response);
+        showListProduct(request, response);
     }
 
     private void actionEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -139,7 +138,8 @@ public class ProductController extends HttpServlet {
         String name = request.getParameter("name");
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         float price = Float.parseFloat(request.getParameter("price"));
-        String image = request.getParameter("image");
+        String image = request.getParameter("avatar");
+
         int qty = Integer.parseInt(request.getParameter("qty"));
         product.setName(name);
         product.setIdCategory(idCategory);
@@ -148,8 +148,7 @@ public class ProductController extends HttpServlet {
         product.setQuantity(qty);
         productService.save(product);
         request.setAttribute("message", "EDIT PRODUCT SUCCESS !!!");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/edit.jsp");
-        requestDispatcher.forward(request, response);
+        showListProduct(request, response);
     }
 
     private void actionFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {

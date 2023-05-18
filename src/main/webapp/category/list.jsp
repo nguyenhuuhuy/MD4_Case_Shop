@@ -102,7 +102,6 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
 
-
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
                                                         <h5 class="modal-title" id="exampleModalLabel9">
@@ -213,7 +212,6 @@
 
 
 </body>
-
 
 <jsp:include page="../library/bootstrap/bootstrapAdmin.jsp"></jsp:include>
 </html>
