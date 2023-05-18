@@ -11,6 +11,16 @@
 <head>
 </head>
 <body>
+<div style="margin-top: 200px">
+
+    <h4 class="p-2">
+        <span class="custom" style="color: black;" onclick="ListAll()" id="listProductAll-text">All</span>
+        <span class="custom" onclick="byCategory01()" id="findByCategory_01-text" >category1</span>
+        <span class="custom" onclick="byCategory02()" id="findByCategory_02-text">category2</span>
+    </h4>
+
+
+</div>
 <!--new-arrivals start -->
 <section id="new-arrivals" class="new-arrivals">
     <div class="container">
@@ -18,7 +28,7 @@
             <h2>new arrivals</h2>
         </div><!--/.section-header-->
         <div class="new-arrivals-content">
-            <div class="row">
+            <div class="row" id="ListProductAll">
                 <c:forEach var="pr" items='${requestScope["productList"]}'>
                     <div class="col-md-3 col-sm-4">
                         <div class="single-new-arrival">
@@ -42,8 +52,53 @@
                     </div>
                 </c:forEach>
             </div>
+            <div class="row" id="findByCategory_01">
+
+            </div>
+            <div class="row" id="findByCategory_02">
+
+            </div>
         </div>
-    </div><!--/.container-->
+    </div>
+    <!--/.container-->
+
+    <script>
+        let waiting = document.getElementById("ListProductAll");
+        let history = document.getElementById("findByCategory_01");
+        let cancelled = document.getElementById("findByCategory_02");
+
+        let waitingT = document.getElementById("listProductAll-text");
+        let historyT = document.getElementById("FindByCategory_01-text");
+        let cancelledT = document.getElementById("FindByCategory_02-text");
+
+        let ListAll = () => {
+            waiting.style.display = "";
+            waitingT.style.color = "black";
+            historyT.style.color = "thistle";
+            cancelledT.style.color = "thistle";
+            history.style.display = "none";
+            cancelled.style.display = "none";
+        }
+
+        let byCategory01 = () => {
+            waiting.style.display = "none";
+            history.style.display = "";
+            waitingT.style.color = "thistle";
+            historyT.style.color = "black";
+            cancelledT.style.color = "thistle";
+            cancelled.style.display = "none";
+        }
+
+        let byCategory02 = () => {
+            waiting.style.display = "none";
+            history.style.display = "none";
+            cancelled.style.display = "";
+            waitingT.style.color = "thistle";
+            historyT.style.color = "thistle";
+            cancelledT.style.color = "black";
+        }
+
+    </script>
 </section>
 <!--new-arrivals end -->
 </body>

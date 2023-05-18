@@ -270,7 +270,6 @@ public class UserController extends HttpServlet {
                         throw new RuntimeException(e);
                     }
                 } else {
-
                     try {
                         response.sendRedirect("index.jsp");
                     } catch (IOException e) {

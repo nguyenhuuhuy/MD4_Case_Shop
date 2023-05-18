@@ -40,12 +40,31 @@ public class HomeController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            default:
+                actionSearch(request,response);
+                break;
+        }
+    }
+
+    private void actionSearch(HttpServletRequest request,HttpServletResponse response){
         String search = request.getParameter("search");
         List<Product> productList = productService.findByCategoryAndByName(search.trim());
         request.setAttribute("productList", productList);
-        request.getRequestDispatcher("pages/home/home.jsp").forward(request, response);
+        try {
+            request.getRequestDispatcher("pages/home/home.jsp").forward(request, response);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Product> productList = productService.findAll();
         request.setAttribute("productList", productList);
