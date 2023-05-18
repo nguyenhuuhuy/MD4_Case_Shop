@@ -59,6 +59,13 @@ public class UserController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "block":
+                try {
+                    blockUser(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 try {
                     listUser(request, response);
@@ -67,6 +74,26 @@ public class UserController extends HttpServlet {
                 }
         }
 
+    }
+    // khóa tái khoản
+    private void blockUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userService.findById(id);
+        User userLogin = getUserLogin(request);
+        Set<Role> roleSetUserLogin = userLogin.getRoleSet();
+        List<Role> roleListUserLogin = new ArrayList<>(roleSetUserLogin);
+        Set<Role> roleSet = user.getRoleSet();
+        List<Role> roles = new ArrayList<>(roleSet);
+        if (roles.get(0).getName() == RoleName.ADMIN){
+            request.setAttribute("message","bạn không được khóa tk này");
+            listUser(request,response);
+        } else if (roles.get(0).getName() == roleListUserLogin.get(0).getName()){
+            request.setAttribute("message","TK cùng cấp");
+            listUser(request,response);
+        } else {
+            userService.blockUser(user);
+            listUser(request, response);
+        }
     }
 
 
@@ -257,7 +284,8 @@ public class UserController extends HttpServlet {
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        User user = userService.userLogin(username, password);
+        boolean status = false;
+        User user = userService.userLogin(username, password,status);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userLogin", user);
@@ -279,7 +307,6 @@ public class UserController extends HttpServlet {
                     }
                 }
             }
-
         } else {
             request.setAttribute("validate", "Đăng nhập thất bại vui lòng kiểm tra lại mật khẩu và tài khoản đăng nhập");
             showFormLogin(request, response);
@@ -299,7 +326,10 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
+    private User getUserLogin(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("userLogin");
+        return user;
+    }
     private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
 
     }

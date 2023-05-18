@@ -42,6 +42,25 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
+                        <c:if test='${sessionScope["userLogin"]!=null}'>
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="img-profile rounded-circle"
+                                         src="${sessionScope['userLogin'].getAvatar()}"
+                                         style="border-radius: 50px; width: 25px;margin-right: 10px;">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item"
+                                       href="/user?action=editUserLogin&id=${sessionScope['userLogin'].getId()}">
+                                        Settings
+                                    </a>
+                                </div>
+                            </li>
+                        </c:if>
                         <li class="search">
                             <a href="#"><span class="lnr lnr-magnifier"></span></a>
                         </li><!--/.search-->
@@ -49,50 +68,33 @@
                             <a href="#"><span class="lnr lnr-cog"></span></a>
                         </li><!--/.search-->
                         <li class="dropdown">
-                            <a href="${sessionScope['userLogin'] != null ? "cart" : "user?action=login"}" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="${sessionScope['userLogin'] != null ? "cart" : "user?action=login"}"
+                               class="dropdown-toggle" data-toggle="dropdown">
                                 <span class="lnr lnr-cart"></span>
-                                <span class="badge badge-bg-1">2</span>
+                                <span class="badge badge-bg-1">${requestScope['cartUser'].getQuantityAll()}</span>
                             </a>
-                            <ul class="dropdown-menu cart-list s-cate">
-                                <li class="single-cart-list">
-                                    <a href="#" class="photo"><img src="assets/images/collection/arrivals1.png"
-                                                                   class="cart-thumb" alt="image"/></a>
-                                    <div class="cart-list-txt">
-                                        <h6><a href="#">arm <br> chair</a></h6>
-                                        <p>1 x - <span class="price">$180.00</span></p>
-                                    </div><!--/.cart-list-txt-->
-                                    <div class="cart-close">
-                                        <span class="lnr lnr-cross"></span>
-                                    </div><!--/.cart-close-->
-                                </li><!--/.single-cart-list -->
-                                <li class="single-cart-list">
-                                    <a href="#" class="photo"><img src="assets/images/collection/arrivals2.png"
-                                                                   class="cart-thumb" alt="image"/></a>
-                                    <div class="cart-list-txt">
-                                        <h6><a href="#">single <br> armchair</a></h6>
-                                        <p>1 x - <span class="price">$180.00</span></p>
-                                    </div><!--/.cart-list-txt-->
-                                    <div class="cart-close">
-                                        <span class="lnr lnr-cross"></span>
-                                    </div><!--/.cart-close-->
-                                </li><!--/.single-cart-list -->
-                                <li class="single-cart-list">
-                                    <a href="#" class="photo"><img src="assets/images/collection/arrivals3.png"
-                                                                   class="cart-thumb" alt="image"/></a>
-                                    <div class="cart-list-txt">
-                                        <h6><a href="#">wooden arn <br> chair</a></h6>
-                                        <p>1 x - <span class="price">$180.00</span></p>
-                                    </div><!--/.cart-list-txt-->
-                                    <div class="cart-close">
-                                        <span class="lnr lnr-cross"></span>
-                                    </div><!--/.cart-close-->
-                                </li><!--/.single-cart-list -->
-                                <li class="total">
-                                    <span>Total: $0.00</span>
-                                    <button class="btn-cart pull-right" onclick="window.location.href='#'">view cart
-                                    </button>
-                                </li>
-                            </ul>
+                            <c:if test='${sessionScope["userLogin"]!=null}'>
+                                <ul class="dropdown-menu cart-list s-cate">
+                                    <c:forEach items="${requestScope['cartUser'].products}" var="pr">
+                                        <li class="single-cart-list">
+                                            <a href="#" class="photo"><img src="${pr.image}"
+                                                                           class="cart-thumb" alt="image"/></a>
+                                            <div class="cart-list-txt">
+                                                <h6><a href="#">${pr.name}</a></h6>
+                                                <p>${pr.quantity} x - <span class="price">${pr.price} $</span></p>
+                                            </div><!--/.cart-list-txt-->
+
+                                        </li>
+                                        <!--/.single-cart-list -->
+                                    </c:forEach>
+                                    <li class="total">
+                                        <span style="padding-left: 71px;">Total: ${requestScope['cartUser'].getTotal()}</span>
+                                        <a href="/cart" style="margin-bottom: 30px;margin-right: 40px;">
+                                            <button class="btn-cart pull-right">view cart</button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </c:if>
                         </li><!--/.dropdown-->
                     </ul>
                 </div><!--/.attr-nav-->
@@ -116,7 +118,6 @@
                         <li class="scroll"><a href="#blog">blog</a></li>
                         <li class="scroll"><a href="#newsletter">contact</a></li>
                         <c:if test='${sessionScope["userLogin"]!=null}'>
-                            <li><a href="/user?action=editUserLogin&id=${sessionScope['userLogin'].getId()}">welcome ${sessionScope["userLogin"].getName()}</a></li>
                             <li><a href="/user?action=logout">Log Out</a></li>
                         </c:if>
                         <c:if test='${sessionScope["userLogin"]==null}'>

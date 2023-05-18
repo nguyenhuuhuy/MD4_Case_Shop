@@ -93,4 +93,12 @@ public class Cart {
 
         return total;
     }
+
+    public int getQuantityAll() {
+        int total = 0;
+        for (Product p : products) {
+            total += p.getQuantity();
+        }
+        return total;
+    }
 }

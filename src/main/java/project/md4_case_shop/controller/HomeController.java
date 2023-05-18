@@ -1,6 +1,12 @@
 package project.md4_case_shop.controller;
 
+
+import project.md4_case_shop.model.Cart;
+import project.md4_case_shop.model.CartStatus;
 import project.md4_case_shop.model.Product;
+import project.md4_case_shop.model.User;
+import project.md4_case_shop.service.cart.CartServiceIMPL;
+import project.md4_case_shop.service.cart.ICartService;
 import project.md4_case_shop.service.product.IProductService;
 import project.md4_case_shop.service.product.ProductServiceIMPL;
 
@@ -17,7 +23,7 @@ import java.util.List;
 @WebServlet(value = {"/home"})
 public class HomeController extends HttpServlet {
     IProductService productService = new ProductServiceIMPL();
-
+    ICartService cartService = new CartServiceIMPL();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -67,7 +73,23 @@ public class HomeController extends HttpServlet {
     }
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Product> productList = productService.findAll();
+
+        User user = getUserLogin(request);
+        if (user!=null){
+            List<Cart> cartList = cartService.findCartByUSerId(getUserLogin(request).getId(), CartStatus.NOT_ORDER);
+
+            Cart cart = null;
+
+            if (cartList.size() > 0) {
+                cart = cartList.get(0);
+            }
+            request.setAttribute("cartUser", cart);
+        }
+
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("pages/home/home.jsp").forward(request, response);
+    }
+    private User getUserLogin(HttpServletRequest request) {
+        return (User) request.getSession().getAttribute("userLogin");
     }
 }

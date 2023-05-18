@@ -58,8 +58,11 @@
                                     <th>Email</th>
                                     <th>Avatar</th>
                                     <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Block</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
+
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -70,6 +73,8 @@
                                     <th>Email</th>
                                     <th>Avatar</th>
                                     <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Block</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -88,23 +93,62 @@
                                             <c:forEach items="${user.getRoleSet()}" var="Role"> ${Role.getName()}
                                             </c:forEach>
                                         </td>
+                                        <td>${user.status == false ? "<i class='fa-solid fa-circle' style='color: #11ff00;'></i>" :"<i class='fa-solid fa-circle' style='color: #000000;'></i>"}</td>
+                                        <td>
+                                                <a type="button" class="dropdown-item" data-toggle="modal"
+                                                   data-target="#blockUser${user.id}">
+                                                    <i class="fa fa-lock" aria-hidden="true" style="color: #ef4949"></i>
+                                                </a>
+                                        </td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#logoutModal${user.id}">
+                                               data-target="#editUser${user.id}">
                                                 <i class="fa-sharp fa-solid fa-pen-to-square"
                                                    style="color: #2a65b2;"></i>
                                             </a>
                                         </td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#logoutModal2${user.id}">
+                                               data-target="#deleteUser${user.id}">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
-                                    </tr>
 
+                                    </tr>
+                                    <!-- Block User-->
+                                    <div class="modal fade" id="blockUser${user.id}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                    </div>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true" style="color: red">x</span>
+                                                    </button>
+                                                </div>
+
+                                                <div align="center">
+                                                    <h1>BLOCK USER</h1>
+                                                        <p style="margin-bottom: 1px; margin-top: 8px">${user.name}</p>
+
+                                                        <p style="margin-bottom: 1px; margin-top: 17px">
+                                                            Are you sure you want to Block ?</p><br>
+                                                        <a href="/user?action=block&id=${user.id}" class="btn btn-danger m-2">
+                                                            Block
+                                                        </a>
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">Cancel
+                                                        </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End BlockUser-->
                                     <!-- Edit Modal-->
-                                    <div class="modal fade" id="logoutModal${user.id}" tabindex="-1" role="dialog"
+                                    <div class="modal fade" id="editUser${user.id}" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -112,7 +156,7 @@
 
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="exampleModalLabel1">
+                                                        <h5 class="modal-title" id="editUser">
                                                             Ready edit user :
                                                         </h5>
                                                         <h5 class="modal-body" style="padding: 4px">ID ${user.id}
@@ -162,14 +206,14 @@
                                     <!-- End Edit Modal-->
 
                                     <!-- Delete Modal-->
-                                    <div class="modal fade" id="logoutModal2${user.id}" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel2"
+                                    <div class="modal fade" id="deleteUser${user.id}" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="exampleModalLabel2">
+                                                        <h5 class="modal-title" id="deleteUser">
                                                             Ready delete user :
                                                         </h5>
                                                         <h5 class="modal-body" style="padding: 4px">ID ${user.id}
