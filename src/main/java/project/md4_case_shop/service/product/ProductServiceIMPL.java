@@ -22,8 +22,6 @@ public class ProductServiceIMPL implements IProductService{
     private static final String PRODUCT_BY_ID = "SELECT * FROM product where id = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM product WHERE id=?;";
     private static final String SEARCH_BY_CATE = "select * from product pr join category ca on pr.idcategory = ca.id where ca.name  like ? or pr.name like ?; ";
-
-
     @Override
     public List<Product> findAll()  {
         List<Product> productList = new ArrayList<>();
@@ -140,5 +138,4 @@ public class ProductServiceIMPL implements IProductService{
         }
         return categoryListSearch;
     }
-
 }
