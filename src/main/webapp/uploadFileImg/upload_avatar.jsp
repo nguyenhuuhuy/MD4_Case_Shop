@@ -8,11 +8,11 @@
 
 <%--<form method="post">--%>
 
-<h1>upload file: ${param.articleId}</h1>
-
-<progress value="0" max="100" id="uploader+${param.articleId}">0%</progress>
+<%--<h1>upload file: ${param.articleId}</h1>--%>
+<h5>Change avatar</h5>
+<progress value="0" max="100" id="uploader+${param.articleId}" hidden>0%</progress>
 <input type="file" value="${param.image}." accept=".jpg" id="fileButton+${param.articleId}">
-<input name="avatar${param.articleId}" type="text" id="avatar+${param.articleId}" style="display: none" >
+<input name="avatar${param.articleId}" type="text" id="avatar+${param.articleId}" style="display: none">
 <div id="imgDiv+${param.articleId}"></div>
 
 <%--  <button type="submit">Upload</button>--%>
