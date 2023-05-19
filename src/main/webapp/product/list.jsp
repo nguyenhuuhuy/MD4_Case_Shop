@@ -106,10 +106,12 @@
                                                 <i class="fa-sharp fa-solid fa-pen-to-square"
                                                    style="color: #2a65b2;"></i>
                                             </a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProduct${pr.id}" data-whatever="${pr.id}"> <i class="fa-sharp fa-solid fa-pen-to-square"
+                                                                                                                                 style="color: #2a65b2;"></i></button>
                                         </td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#deleteProduct${pr.id}">
+                                               data-target="#editProduct">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
