@@ -10,10 +10,11 @@
 
 <h1>upload file: ${param.articleId}</h1>
 
-<progress value="0" max="100" id="uploader${param.articleId}">0%</progress>
-<input type="file" value="${param.image}." accept=".jpg" id="fileButton${param.articleId}">
-<input name="avatar" type="text" id="avatar${param.articleId}" style="display: none" >
-<div id="imgDiv${param.articleId}"></div>
+<progress value="0" max="100" id="uploader+${param.articleId}">0%</progress>
+<input type="file" value="${param.image}." accept=".jpg" id="fileButton+${param.articleId}">
+<input name="avatar${param.articleId}" type="text" id="avatar+${param.articleId}" style="display: none" >
+<div id="imgDiv+${param.articleId}"></div>
+
 <%--  <button type="submit">Upload</button>--%>
 <%--</form>--%>
 <%--<script>--%>
@@ -36,6 +37,7 @@
 <%--</script>--%>
 
 <script type="text/javascript">
+
     firebase.initializeApp(firebaseConfig);
     console.log('goi config')
     // var image = '';
@@ -45,8 +47,8 @@
     var fbBucketName = 'images';
 
     // get elements
-    var uploader = document.getElementById('uploader${param.articleId}');
-    var fileButton = document.getElementById('fileButton${param.articleId}');
+    var uploader = document.getElementById('uploader+${param.articleId}');
+    var fileButton = document.getElementById('fileButton+${param.articleId}');
     console.log('uploader --->', uploader)
 
     console.log('fileButton -->', fileButton)
@@ -106,15 +108,15 @@
                 var downloadURL = uploadTask.snapshot.downloadURL;
                 image = downloadURL;
                 console.log('downloadURL ===>', downloadURL);
-                let divLocation = document.getElementById("imgDiv${param.articleId}");
+                let divLocation = document.getElementById("imgDiv+${param.articleId}");
                 let imgElement = document.createElement("img");
                 imgElement.src = downloadURL
                 imgElement.width = 100;
                 imgElement.height = 100;
                 console.log('pic ==', downloadURL)
                 divLocation.append(imgElement);
-                document.getElementById('avatar${param.articleId}').value = downloadURL;
-
+                document.getElementById('avatar+${param.articleId}').value = downloadURL;
+                console.log('id avatar ------------------>', document.getElementById('avatar+${param.articleId}').value)
             });
 
     });

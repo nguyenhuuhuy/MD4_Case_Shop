@@ -138,7 +138,7 @@ public class ProductController extends HttpServlet {
         String name = request.getParameter("name");
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         float price = Float.parseFloat(request.getParameter("price"));
-        String image = request.getParameter("avatar");
+        String image = request.getParameter("avatar"+id);
 
         int qty = Integer.parseInt(request.getParameter("qty"));
         product.setName(name);
