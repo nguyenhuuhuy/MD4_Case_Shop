@@ -28,6 +28,7 @@
 
 <body id="page-top">
 
+
 <!-- Page Wrapper -->
 <div id="wrapper">
     <jsp:include page="../pages/admin/adminSidebar.jsp"></jsp:include>
@@ -61,6 +62,9 @@
                             <h4 class="m-0 font-weight-bold text-primary">
                                 DataTables Product Manage</h4>
                             <a href="product?action=create" type="button" class="btn btn-success m-0">Create Product</a>
+                            <c:if test="${requestScope['categoryList']!=null}">
+                                <a href="">ok</a>
+                            </c:if>
                         </div>
                     </div>
                     <div class="card-body">
@@ -162,9 +166,10 @@
                                                             select:</label>
                                                         <select class="custom-select" name="idCategory"
                                                                 style="width: 300px">
-                                                            <option value="${pr.category.cId}">${pr.category.cName}</option>
-                                                            <option value="2">Cate 2</option>
-                                                            <option value="3">Cate 3</option>
+                                                            <option value="${pr.category.cId}" hidden="">${pr.category.cName}</option>
+                                                            <c:forEach var="cr" items='${requestScope["categoryList"]}'>
+                                                                <option value="${cr.cId}">${cr.cName}</option>
+                                                            </c:forEach>
                                                         </select>
                                                             <%--Category--%>
                                                         <div>

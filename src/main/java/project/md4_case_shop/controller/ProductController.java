@@ -1,6 +1,11 @@
 package project.md4_case_shop.controller;
 
+import project.md4_case_shop.model.Category;
 import project.md4_case_shop.model.Product;
+import project.md4_case_shop.service.cart.CartServiceIMPL;
+import project.md4_case_shop.service.cart.ICartService;
+import project.md4_case_shop.service.category.CategoryServiceIMPL;
+import project.md4_case_shop.service.category.ICategoryService;
 import project.md4_case_shop.service.product.IProductService;
 import project.md4_case_shop.service.product.ProductServiceIMPL;
 
@@ -18,7 +23,8 @@ import java.util.List;
 @WebServlet(value = {"/product"})
 public class ProductController extends HttpServlet {
     IProductService productService = new ProductServiceIMPL();
-
+    ICartService cartService = new CartServiceIMPL();
+    ICategoryService categoryService = new CategoryServiceIMPL();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -78,6 +84,8 @@ public class ProductController extends HttpServlet {
 
     private void showListProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Product> productList = productService.findAll();
+        List<Category> categoryList = categoryService.findAll();
+        request.setAttribute("categoryList",categoryList);
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("product/list.jsp").forward(request, response);
     }
