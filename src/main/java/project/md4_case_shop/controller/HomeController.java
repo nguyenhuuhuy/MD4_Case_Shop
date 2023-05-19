@@ -64,18 +64,22 @@ public class HomeController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+//            case "addComment":
+//                actionAddComment(request,response);
+//                break;
             default:
                 actionSearch(request,response);
                 break;
         }
     }
 
-    private void comment(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void comment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
         int productId = Integer.parseInt(request.getParameter("productId"));
         String commentUser = request.getParameter("comment");
         Comment comment = new Comment(productId,userId,commentUser);
         commentService.save(comment);
+        detailProduct(request,response);
     }
 
     private void actionSearch(HttpServletRequest request,HttpServletResponse response){
@@ -112,13 +116,18 @@ public class HomeController extends HttpServlet {
         return (User) request.getSession().getAttribute("userLogin");
     }
     private void detailProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("productId"));
+        List<Comment> commentList = commentService.commentProduct(id);
         Product product = productService.findById(id);
         User user = getUserLogin(request);
+        request.setAttribute("comment",commentList);
         request.setAttribute("userLogin",user);
         request.setAttribute("detail",product);
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/homeDetail.jsp");
         dispatcher.forward(request,response);
     }
-
+//    private void actionAddComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
+//
+//        detailProduct(request,response);
+//    }
 }

@@ -59,6 +59,11 @@ public class User {
         this.roleSet = roleSet;
     }
 
+    public User(String name, String avatar) {
+        this.name = name;
+        this.avatar = avatar;
+    }
+
     public int getId() {
         return id;
     }

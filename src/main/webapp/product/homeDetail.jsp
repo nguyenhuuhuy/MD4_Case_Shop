@@ -23,14 +23,19 @@
         <p>${requestScope["detail"].quantity}</p>
         <form method="post" action="/home?action=comment">
             <c:if test='${requestScope["userLogin"]!=null}'>
-                <input type="text" name="userId" value="${requestScope["userLogin"].id}">
+                <input type="text" name="userId" value="${requestScope["userLogin"].id}" hidden="">
             </c:if>
-            <input type="text" name="productId" value="${requestScope["detail"].id}"><br>
+            <input type="text" name="productId" value="${requestScope["detail"].id}" hidden=""><br>
             <p>comment</p>
         <input type="text" name="comment" value="">
             <button type="submit">add</button>
         </form>
     </c:if>
+<c:forEach items='${requestScope["comment"]}' var="cm">
+    <h1>${cm.getUsername()}</h1>
+    <img src="${cm.getAvatar()}" alt="" style="width: 50px;height: 50px">
+    <h1>${cm.getComment()}</h1>
+</c:forEach>
 </body>
 <jsp:include page='/layout/footer.jsp'>
   <jsp:param name="articleId" value=""/>

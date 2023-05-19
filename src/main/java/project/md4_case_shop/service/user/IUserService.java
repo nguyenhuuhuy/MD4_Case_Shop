@@ -13,4 +13,5 @@ public interface IUserService extends IGenericService<User> {
     Set<Role> findRoleByUserId(int user_id);
     void updateAvatar(String avatar, int id);
     void blockUser(User user);
+
 }
