@@ -1,16 +1,16 @@
 package project.md4_case_shop.controller;
 
 
-import project.md4_case_shop.model.Cart;
-import project.md4_case_shop.model.CartStatus;
-import project.md4_case_shop.model.Product;
-import project.md4_case_shop.model.User;
+import project.md4_case_shop.model.*;
 import project.md4_case_shop.service.cart.CartServiceIMPL;
 import project.md4_case_shop.service.cart.ICartService;
+import project.md4_case_shop.service.comment.CommentServiceIMPL;
+import project.md4_case_shop.service.comment.ICommentService;
 import project.md4_case_shop.service.product.IProductService;
 import project.md4_case_shop.service.product.ProductServiceIMPL;
 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +24,7 @@ import java.util.List;
 public class HomeController extends HttpServlet {
     IProductService productService = new ProductServiceIMPL();
     ICartService cartService = new CartServiceIMPL();
+    ICommentService commentService = new CommentServiceIMPL();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -35,6 +36,9 @@ public class HomeController extends HttpServlet {
                 action = "";
             }
             switch (action) {
+                case "detail":
+                    detailProduct(request,response);
+                    break;
                 default:
                     showListProduct(request, response);
                     break;
@@ -53,10 +57,25 @@ public class HomeController extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "comment":
+                try {
+                    comment(request,response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
             default:
                 actionSearch(request,response);
                 break;
         }
+    }
+
+    private void comment(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        String commentUser = request.getParameter("comment");
+        Comment comment = new Comment(productId,userId,commentUser);
+        commentService.save(comment);
     }
 
     private void actionSearch(HttpServletRequest request,HttpServletResponse response){
@@ -92,4 +111,14 @@ public class HomeController extends HttpServlet {
     private User getUserLogin(HttpServletRequest request) {
         return (User) request.getSession().getAttribute("userLogin");
     }
+    private void detailProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Product product = productService.findById(id);
+        User user = getUserLogin(request);
+        request.setAttribute("userLogin",user);
+        request.setAttribute("detail",product);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/homeDetail.jsp");
+        dispatcher.forward(request,response);
+    }
+
 }

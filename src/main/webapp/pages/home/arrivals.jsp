@@ -46,7 +46,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <h4><a href="#">${pr.name}</a></h4>
+                            <h4><a href="home?action=detail&id=${pr.id}">${pr.name}</a></h4>
                             <p class="arrival-product-price">${pr.price}</p>
                         </div>
                     </div>

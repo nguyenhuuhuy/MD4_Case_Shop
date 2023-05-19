@@ -1,5 +1,8 @@
 package project.md4_case_shop.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
 
     private int id;
@@ -10,7 +13,8 @@ public class Product {
     private int quantity;
     private int stock;
     private int idCategory;
-
+    List<User> likeList = new ArrayList<>();
+    List<Comment> commentList = new ArrayList<>();
     public Product() {
     }
 
@@ -30,6 +34,22 @@ public class Product {
         this.price = price;
         this.image = image;
         this.quantity = qty;
+    }
+
+    public List<User> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<User> likeList) {
+        this.likeList = likeList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     public int getStock() {
