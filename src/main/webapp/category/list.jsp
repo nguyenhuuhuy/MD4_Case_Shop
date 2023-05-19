@@ -12,8 +12,8 @@
     <title>Admin - Category</title>
     <link rel="shortcut icon" type="image/icon" href="../../assets/logo/favicon.png"/>
     <link rel="stylesheet" href="../../assets/css/all.min.css">
-    <link            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../../assets/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -38,9 +38,6 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
-            <c:if test='${requestScope["message"] != null}'>
-                <span class="message">${requestScope["message"]}</span>
-            </c:if>
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -48,7 +45,13 @@
                     <div>
                         <div class="card-header py-3" style="display: flex; justify-content: space-between;">
                             <h4 class="m-0 font-weight-bold text-primary">
-                                DataTables Category Manage</h4>
+                                DataTables Category Manage
+                            </h4>
+                            <div style="color: #1cc88a; margin-top: 10px">
+                                <c:if test='${requestScope["message"] != null}'>
+                                    <span class="message">${requestScope["message"]}</span>
+                                </c:if>
+                            </div>
                             <a href="category?action=create" type="text" class="btn btn-success m-0"
                             > Create Category </a>
                         </div>
@@ -85,10 +88,10 @@
                                             </a>
                                         </td>
                                         <td>
-<%--                                            <a type="button"--%>
-<%--                                               href="category?action=delete&id=${cate.cId}">--%>
-<%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
-<%--                                            </a>--%>
+                                                <%--                                            <a type="button"--%>
+                                                <%--                                               href="category?action=delete&id=${cate.cId}">--%>
+                                                <%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
+                                                <%--                                            </a>--%>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
                                                data-target="#logoutModal2${cate.cId}">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
@@ -121,7 +124,7 @@
                                                           method="post">
                                                         <label>Category name</label>&ensp;
                                                         <input type="text" name="name" value="${cate.cName}">
-                                                         <br>
+                                                        <br>
                                                         <button type="submit" class="btn btn-success m-3">
                                                             EDIT
                                                         </button>
@@ -209,7 +212,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 
 </body>
 

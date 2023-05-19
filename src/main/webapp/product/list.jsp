@@ -55,7 +55,7 @@
             </script>
             <div class="container-fluid">
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
+                <div class="card shadow mb-1">
                     <div>
                         <div class="card-header py-3" style="display: flex; justify-content: space-between;">
                             <h4 class="m-0 font-weight-bold text-primary">
@@ -100,21 +100,22 @@
                                         <td>${pr.price}</td>
                                         <td><img width="80" height="80" src="${pr.image}" alt=""></td>
                                         <td>${pr.quantity}</td>
+
                                         <td>
-                                            <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#editProduct${pr.id}">
+                                            <button type="button" class="btn " data-toggle="modal"
+                                                    data-target="#editProduct${pr.id}" data-whatever="${pr.id}">
                                                 <i class="fa-sharp fa-solid fa-pen-to-square"
                                                    style="color: #2a65b2;"></i>
-                                            </a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProduct${pr.id}" data-whatever="${pr.id}"> <i class="fa-sharp fa-solid fa-pen-to-square"
-                                                                                                                                 style="color: #2a65b2;"></i></button>
+                                            </button>
                                         </td>
+
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
                                                data-target="#editProduct">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
+
                                     </tr>
                                     <!-- Edit Modal-->
                                     <div class="modal fade" id="editProduct${pr.id}" tabindex="-1" role="dialog"
@@ -125,11 +126,7 @@
 
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="exampleModalLabel1">
-                                                            Ready edit product :
-                                                        </h5>
-                                                        <h5 class="modal-body" style="padding: 4px">ID ${pr.id}
-                                                            ?</h5>
+                                                        <h1>EDIT PRODUCT</h1>
                                                     </div>
                                                     <button class="close" type="button" data-dismiss="modal"
                                                             aria-label="Close">
@@ -138,50 +135,57 @@
                                                 </div>
 
                                                 <div align="center">
-                                                    <h1>EDIT PRODUCT</h1>
                                                     <form action="product?action=edit&id=${pr.id}"
                                                           method="post">
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
 
-                                                        <input type="text" name="id" value="${pr.id}" disabled>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
-
-                                                        <input type="text" name="name" value="${pr.name}">
-
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Category:</p>
-
-                                                        <input type="text" name="idCategory"
-                                                               value="${pr.category.cName}">
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Price:</p>
-
-                                                        <input type="text" name="price" value="${pr.price}">
-
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Quantity:</p>
-
-                                                        <input type="text" name="qty" value="${pr.quantity}">
-
+                                                            <%--avatar--%>
+                                                        <img width="80" height="80" src="${pr.image}" alt="">
                                                         <input type="text" name="avatar" value="${pr.image}"
                                                                hidden>
-
                                                         <jsp:include page='../uploadFileImg/upload_avatar.jsp'>
                                                             <jsp:param name="articleId" value="${pr.id}"/>
-
                                                         </jsp:include>
+                                                            <%--avatar--%>
+                                                        <hr width="80%">
+                                                            <%--ID--%>
+                                                        <label style="margin-bottom: 1px; margin-top: 19px">Id:</label>
+                                                        <input type="text" name="id" value="${pr.id}" disabled>
+                                                            <%--ID--%>
+
+                                                            <%--Name--%>
+                                                        <label style="margin-bottom: 1px; margin-top: 19px">Name:</label>
+                                                        <input type="text" name="name" value="${pr.name}">
+                                                            <%--Name--%>
+
+                                                            <%--Category--%>
+                                                        <label style="margin-bottom: 1px; margin-top: 19px">Category
+                                                            select:</label>
+                                                        <select class="custom-select" name="idCategory"
+                                                                style="width: 300px">
+                                                            <option value="${pr.category.cId}">${pr.category.cName}</option>
+                                                            <option value="2">Cate 2</option>
+                                                            <option value="3">Cate 3</option>
+                                                        </select>
+                                                            <%--Category--%>
+                                                        <div>
+                                                                <%--Price--%>
+                                                            <p style="margin-bottom: 1px; margin-top: 8px">Price:</p>
+                                                            <input type="text" name="price" value="${pr.price}">
+                                                                <%--Price--%>
+
+                                                                <%--Quantity--%>
+                                                            <p style="margin-bottom: 1px; margin-top: 8px">Quantity:</p>
+                                                            <input type="text" name="qty" value="${pr.quantity}">
+                                                                <%--Quantity--%>
+                                                        </div>
                                                         <button type="submit" class="btn btn-success m-3">
                                                             EDIT
                                                         </button>
                                                         <button class="btn btn-secondary" type="button"
                                                                 data-dismiss="modal">Cancel
                                                         </button>
-                                                            <%-- sua anh--%>
-
                                                     </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
