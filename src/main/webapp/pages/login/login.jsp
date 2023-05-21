@@ -22,10 +22,10 @@
             background: #eee;
         }
 
-        .h-custom {
-            height: calc(100% - 73px);
+        /*.h-custom {*/
+        /*    height: calc(100% - 73px);*/
 
-        }
+        /*}*/
 
         @media (max-width: 450px) {
             .h-custom {

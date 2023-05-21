@@ -142,18 +142,6 @@ nav.bootsnav.navbar-full .navbar-collapse .nav-full::-webkit-scrollbar {
     width: 0;
 }
 
-nav.bootsnav.navbar-full .navbar-collapse .nav-full::-moz-scrollbar {
-    width: 0;
-}
-
-nav.bootsnav.navbar-full .navbar-collapse .nav-full::-ms-scrollbar {
-    width: 0;
-}
-
-nav.bootsnav.navbar-full .navbar-collapse .nav-full::-o-scrollbar {
-    width: 0;
-}
-
 
 nav.bootsnav.navbar-full .navbar-collapse ul.nav {
     display: block;
@@ -1360,6 +1348,8 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked {
 }
 
 @media (max-width: 767px) {
+
+
     nav.navbar.bootsnav .navbar-header {
         padding-left: 15px;
         padding-right: 15px;
@@ -1450,6 +1440,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked {
         padding-top: 15px !important;
         padding-bottom: 15px !important;
     }
+
 }
 
 @media (min-width: 480px) and (max-width: 640px) {
