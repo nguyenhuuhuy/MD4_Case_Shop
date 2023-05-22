@@ -112,7 +112,7 @@
 
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#editProduct">
+                                               data-target="#deleteProduct${pr.id}">
                                                 <i class="fa-solid fa-trash" style="color: #ef4949"></i>
                                             </a>
                                         </td>
@@ -163,7 +163,8 @@
                                                             select:</label>
                                                         <select class="custom-select" name="idCategory"
                                                                 style="width: 300px">
-                                                            <option value="${pr.category.cId}" hidden="">${pr.category.cName}</option>
+                                                            <option value="${pr.category.cId}"
+                                                                    hidden="">${pr.category.cName}</option>
                                                             <c:forEach var="cr" items='${requestScope["categoryList"]}'>
                                                                 <option value="${cr.cId}">${cr.cName}</option>
                                                             </c:forEach>
@@ -201,11 +202,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="exampleModalLabel3">
-                                                            Ready delete product :
-                                                        </h5>
-                                                        <h5 class="modal-body" style="padding: 4px">ID ${pr.id}
-                                                            ?</h5>
+                                                        <h1>DELETE PRODUCT</h1>
                                                     </div>
                                                     <button class="close" type="button" data-dismiss="modal"
                                                             aria-label="Close">
@@ -214,7 +211,7 @@
                                                 </div>
 
                                                 <div align="center">
-                                                    <h1>DELETE PRODUCT</h1>
+
                                                     <form action="/product?action=delete&id=${pr.id}"
                                                           method="post">
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
