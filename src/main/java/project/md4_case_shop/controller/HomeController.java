@@ -123,9 +123,11 @@ public class HomeController extends HttpServlet {
     }
     private void detailProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("productId"));
+        List<Integer> integerList = productService.userLike(id);
         List<Comment> commentList = commentService.commentProduct(id);
         Product product = productService.findById(id);
         User user = getUserLogin(request);
+        request.setAttribute("like",integerList.size());
         request.setAttribute("comment",commentList);
         request.setAttribute("userLogin",user);
         request.setAttribute("detail",product);

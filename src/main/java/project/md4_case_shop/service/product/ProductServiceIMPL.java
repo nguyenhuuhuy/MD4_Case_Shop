@@ -24,7 +24,7 @@ public class ProductServiceIMPL implements IProductService{
     private static final String SEARCH_BY_CATE = "select * from product pr join category ca on pr.idcategory = ca.id where ca.name  like ? or pr.name like ?; ";
     private static final String CREATE_LIKE = "insert into likeproduct(productid, userid) value (?,?)";
     private static final String   CHECK_LIKE_PRODUCT = "select *from likeproduct where productid = ? and userid = ?;";
-    private static final String USER_LIKE = "select likeproduct.productid from likeproduct where userid = ?;";
+    private static final String USER_LIKE = "select likeproduct.userid from likeproduct where productid = ?;";
     @Override
     public List<Product> findAll()  {
         List<Product> productList = new ArrayList<>();
@@ -181,16 +181,16 @@ public class ProductServiceIMPL implements IProductService{
     }
 
     @Override
-    public List<Integer> userLike(int userId) {
+    public List<Integer> userLike(int productId) {
         List<Integer> integerList;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(USER_LIKE);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, productId);
             integerList = new ArrayList<>();
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int prId = resultSet.getInt("productid");
-                integerList.add(prId);
+                int usId = resultSet.getInt("userid");
+                integerList.add(usId);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

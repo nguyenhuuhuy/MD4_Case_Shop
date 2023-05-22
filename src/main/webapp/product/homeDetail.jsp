@@ -104,7 +104,9 @@
                                     <label style="color: #ffc700" title="text">5 star</label>
 
                                 </div>
-                                <span>3 Reviews</span>
+                                <c:if test='${requestScope["like"]!=null}'>
+                                <span>${requestScope["like"]}</span>
+                                </c:if>
                             </div>
                             <div class="product-price-discount">
                                 <span style="color: black">$ ${requestScope["detail"].price}</span>
