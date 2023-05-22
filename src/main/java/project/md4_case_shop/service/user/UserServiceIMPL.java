@@ -5,6 +5,10 @@ import project.md4_case_shop.model.Role;
 import project.md4_case_shop.model.RoleName;
 import project.md4_case_shop.model.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,7 +24,6 @@ public class UserServiceIMPL implements IUserService {
     private final String INSERT_INTO_USER_ROLE = "INSERT INTO userrole(iduser, idrole) VALUES (?,?);";
     private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND convert(password using utf8mb4) collate utf8mb4_bin=? AND status=?;";
     private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
-    private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
     private String UPDATE_USER = "update user set name = ?, username = ?, email = ?, password = ?, status = ?, avatar = ? where id = ?";
     private String FIND_ID = "select name,username,email,password,status,avatar from user where id = ?";
     private String REMOVE = "delete from user where id = ?";
@@ -212,20 +215,6 @@ public class UserServiceIMPL implements IUserService {
     }
 
     @Override
-    public void updateAvatar(String avatar, int id) {
-        try {
-            connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AVATAR);
-            preparedStatement.setString(1, avatar);
-            preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
-            connection.commit();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
     public void blockUser(User user) {
         try {
             connection.setAutoCommit(false);
@@ -238,6 +227,21 @@ public class UserServiceIMPL implements IUserService {
             throw new RuntimeException(e);
         }
     }
-    //
 
+    public static String checkCurrenUser(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession httpSession = request.getSession(false);
+            User user = (User) httpSession.getAttribute("userLogin");
+        if (user == null){
+            try {
+                response.sendRedirect("/user?action=login");
+                return "NONE";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            Set<Role> roleSet = user.getRoleSet();
+            List<Role> roleList = new ArrayList<>(roleSet);
+           return String.valueOf(roleList.get(0).getName());
+        }
+    }
 }

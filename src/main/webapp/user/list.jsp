@@ -38,7 +38,7 @@
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
             <c:if test='${requestScope["message"] != null}'>
-                <span class="message">${requestScope["message"]}</span>
+                <span class="message" style="color: red; margin-left: 400px;">${requestScope["message"]}</span>
             </c:if>
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -168,25 +168,28 @@
                                                 <div align="center">
                                                     <form action="/user?action=edit&id=${user.id}"
                                                           method="post">
+                                                        <h2>
+                                                            <c:if test='${requestScope["message"]!=null}'>
+                                                                <h2 style="color: red">${requestScope["message"]}</h2>
+                                                            </c:if>
+                                                        </h2>
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
 
                                                         <input type="text" name="id" value="${user.id}" disabled>
 
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
 
-                                                        <input type="text" name="name" value="${user.name}">
+                                                        <input type="text" name="name" value="${user.name}" required>
 
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
 
-                                                        <input type="text" name="email" value="${user.email}">
+                                                        <input type="email" name="email" value="${user.email}" required>
 
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Password:</p>
 
-                                                        <input type="text" name="password" value="${user.password}">
+                                                        <input type="text" name="password" value="${user.password}" required>
 
-                                                        <c:if test='${requestScope["message"] != null}'>
-                                                            <span class="message">${requestScope["message"]}</span>
-                                                        </c:if> <br>
+                                                         <br>
                                                         <button type="submit" class="btn btn-success m-3">
                                                             EDIT
                                                         </button>

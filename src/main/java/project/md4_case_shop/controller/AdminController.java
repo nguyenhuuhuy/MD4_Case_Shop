@@ -4,6 +4,7 @@ import project.md4_case_shop.model.Cart;
 import project.md4_case_shop.model.CartStatus;
 import project.md4_case_shop.service.cart.CartServiceIMPL;
 import project.md4_case_shop.service.cart.ICartService;
+import project.md4_case_shop.service.user.UserServiceIMPL;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,13 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
+        String checkRoleValidate = UserServiceIMPL.checkCurrenUser(request,response);
+        if (checkRoleValidate.equalsIgnoreCase("NONE")){
+            return;
+        } if (checkRoleValidate.equalsIgnoreCase("user")){
+            response.sendRedirect("index.jsp");
+            return;
+        }
         String action = request.getParameter("action");
         if (action == null) {
             action = "";

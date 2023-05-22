@@ -203,10 +203,12 @@ public class UserController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("nameLogin");
         String email = request.getParameter("emailLogin");
+        String avatar = request.getParameter("avatar");
         String password = request.getParameter("passwordLogin");
         User user = userService.findById(id);
         user.setName(name);
         user.setEmail(email);
+        user.setAvatar(avatar);
         user.setPassword(password);
         userService.save(user);
         if (session.getAttribute("userLogin") != null) {
@@ -350,12 +352,4 @@ public class UserController extends HttpServlet {
         User user = (User) request.getSession().getAttribute("userLogin");
         return user;
     }
-
-    private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
-
-    }
-
-    private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response) {
-    }
-
 }

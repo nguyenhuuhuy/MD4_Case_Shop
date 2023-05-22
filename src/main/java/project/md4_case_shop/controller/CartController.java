@@ -8,6 +8,7 @@ import project.md4_case_shop.service.cart.CartServiceIMPL;
 import project.md4_case_shop.service.cart.ICartService;
 import project.md4_case_shop.service.product.IProductService;
 import project.md4_case_shop.service.product.ProductServiceIMPL;
+import project.md4_case_shop.service.user.UserServiceIMPL;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,6 +24,13 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            String checkRoleValidate = UserServiceIMPL.checkCurrenUser(request,response);
+            if (checkRoleValidate.equalsIgnoreCase("NONE")){
+                return;
+            } if (checkRoleValidate.equalsIgnoreCase("user")){
+                response.sendRedirect("index.jsp");
+                return;
+            }
             String action = request.getParameter("action");
             if (action == null) action = "";
             switch (action) {
@@ -185,6 +193,13 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            String checkRoleValidate = UserServiceIMPL.checkCurrenUser(request,response);
+            if (checkRoleValidate.equalsIgnoreCase("NONE")){
+                return;
+            } if (checkRoleValidate.equalsIgnoreCase("user")){
+                response.sendRedirect("index.jsp");
+                return;
+            }
             String action = request.getParameter("action");
             if (action == null) action = "";
             switch (action) {

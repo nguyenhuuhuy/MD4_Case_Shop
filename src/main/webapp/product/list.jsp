@@ -155,7 +155,7 @@
 
                                                             <%--Name--%>
                                                         <label style="margin-bottom: 1px; margin-top: 19px">Name:</label>
-                                                        <input type="text" name="name" value="${pr.name}">
+                                                        <input type="text" name="name" value="${pr.name}" required>
                                                             <%--Name--%>
 
                                                             <%--Category--%>
@@ -173,12 +173,12 @@
                                                         <div>
                                                                 <%--Price--%>
                                                             <p style="margin-bottom: 1px; margin-top: 8px">Price:</p>
-                                                            <input type="text" name="price" value="${pr.price}">
+                                                            <input type="text" name="price" value="${pr.price}" required>
                                                                 <%--Price--%>
 
                                                                 <%--Quantity--%>
                                                             <p style="margin-bottom: 1px; margin-top: 8px">Quantity:</p>
-                                                            <input type="text" name="qty" value="${pr.quantity}">
+                                                            <input type="text" name="qty" value="${pr.quantity}" required>
                                                                 <%--Quantity--%>
                                                         </div>
                                                         <button type="submit" class="btn btn-success m-3">

@@ -121,9 +121,9 @@
                                                 <div align="center">
                                                     <h1>EDIT CATEGORY</h1>
                                                     <form action="/category?action=edit&id=${cate.cId}"
-                                                          method="post">
+                                                          method="post" class="was-validated">
                                                         <label>Category name</label>&ensp;
-                                                        <input type="text" name="name" value="${cate.cName}">
+                                                        <input type="text" name="name" value="${cate.cName}" required>
                                                         <br>
                                                         <button type="submit" class="btn btn-success m-3">
                                                             EDIT
