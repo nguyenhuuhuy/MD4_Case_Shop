@@ -58,14 +58,14 @@ public class UserController extends HttpServlet {
                 break;
             case "editUserLogin":
                 try {
-                    formEditUserLogin(request,response);
+                    formEditUserLogin(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
             case "block":
                 try {
-                    blockUser(request,response);
+                    blockUser(request, response);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -79,6 +79,7 @@ public class UserController extends HttpServlet {
         }
 
     }
+
     // khóa tái khoản
     private void blockUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -88,12 +89,12 @@ public class UserController extends HttpServlet {
         List<Role> roleListUserLogin = new ArrayList<>(roleSetUserLogin);
         Set<Role> roleSet = user.getRoleSet();
         List<Role> roles = new ArrayList<>(roleSet);
-        if (roles.get(0).getName() == RoleName.ADMIN){
-            request.setAttribute("message","bạn không được khóa tk này");
-            listUser(request,response);
-        } else if (roles.get(0).getName() == roleListUserLogin.get(0).getName()){
-            request.setAttribute("message","TK cùng cấp");
-            listUser(request,response);
+        if (roles.get(0).getName() == RoleName.ADMIN) {
+            request.setAttribute("message", "bạn không được khóa tk này");
+            listUser(request, response);
+        } else if (roles.get(0).getName() == roleListUserLogin.get(0).getName()) {
+            request.setAttribute("message", "TK cùng cấp");
+            listUser(request, response);
         } else {
             userService.blockUser(user);
             listUser(request, response);
@@ -124,7 +125,7 @@ public class UserController extends HttpServlet {
                     actionDelete(request, response);
                     break;
                 case "editUserLogin":
-                    actionEditUserLogin(request,response);
+                    actionEditUserLogin(request, response);
                     break;
                 default:
                     listUser(request, response);
@@ -133,11 +134,13 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
     // trang chủ
-    private void home(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+    private void home(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/home/home.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
     }
+
     // Điều hướng tới trang register
     private void showFormRegister(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/login/register.jsp");
@@ -183,9 +186,10 @@ public class UserController extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         userService.save(user);
-        request.setAttribute("message","Đã Thành Công");
-        listUser(request,response);
+        request.setAttribute("message", "Đã Thành Công");
+        listUser(request, response);
     }
+
     // hiện thông tin userLogin
     private void formEditUserLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -193,6 +197,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("userEditLogin", userEditLogin);
         request.getRequestDispatcher("user/editUserLogin.jsp").forward(request, response);
     }
+
     private void actionEditUserLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         HttpSession session = request.getSession(false);
         int id = Integer.parseInt(request.getParameter("id"));
@@ -204,11 +209,12 @@ public class UserController extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         userService.save(user);
-        if (session.getAttribute("userLogin") != null){
-            session.setAttribute("userLogin",user);
+        if (session.getAttribute("userLogin") != null) {
+            session.setAttribute("userLogin", user);
         }
-        home(request,response);
+        home(request, response);
     }
+
     private void formDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id", id);
@@ -218,9 +224,17 @@ public class UserController extends HttpServlet {
 
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        userService.deleteById(id);
-        request.setAttribute("message","Xóa Thành Công");
-        listUser(request, response);
+        if (id == 1) {
+            request.setAttribute("message", "can't delete admin");
+            return;
+        } else if (id == 2) {
+            request.setAttribute("message", "can't delete pm");
+            return;
+        } else {
+            userService.deleteById(id);
+            request.setAttribute("message", "Xóa Thành Công");
+        }
+            listUser(request, response);
     }
 
     private void actionRegister(HttpServletRequest request, HttpServletResponse response) throws SQLException {
@@ -284,12 +298,13 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
     // Đăng Nhập
     private void actionLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         boolean status = false;
-        User user = userService.userLogin(username, password,status);
+        User user = userService.userLogin(username, password, status);
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("userLogin", user);
@@ -330,10 +345,12 @@ public class UserController extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
     private User getUserLogin(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("userLogin");
         return user;
     }
+
     private void showFormChangeAvatar(HttpServletRequest request, HttpServletResponse response) {
 
     }
