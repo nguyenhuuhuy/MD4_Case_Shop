@@ -5,6 +5,10 @@ import project.md4_case_shop.model.Role;
 import project.md4_case_shop.model.RoleName;
 import project.md4_case_shop.model.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -223,6 +227,21 @@ public class UserServiceIMPL implements IUserService {
             throw new RuntimeException(e);
         }
     }
-    //
 
+    public static String checkCurrenUser(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession httpSession = request.getSession(false);
+            User user = (User) httpSession.getAttribute("userLogin");
+        if (user == null){
+            try {
+                response.sendRedirect("/user?action=login");
+                return "NONE";
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            Set<Role> roleSet = user.getRoleSet();
+            List<Role> roleList = new ArrayList<>(roleSet);
+           return String.valueOf(roleList.get(0).getName());
+        }
+    }
 }
