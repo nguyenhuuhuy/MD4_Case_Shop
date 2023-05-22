@@ -94,7 +94,7 @@
                         <div class="product-info">
                             <div class="product-name" style="color: black">${requestScope["detail"].name}</div>
                             <p>Product ID: ${requestScope["detail"].id}</p>
-                            <p>Category: ${requestScope["detail"].category}</p>
+                            <p>Category: ${requestScope["detail"].category.cName}</p>
                             <div>
                                 <div class="rate">
                                     <label style="color: #ffc700" title="text">5 star</label>
