@@ -247,11 +247,18 @@
         <h1>CREATE PRODUCT</h1>
         <form action="" method="post">
           <label>PRUDUCT NAME</label><br>
-          <input type="text" name="name"><br>
+          <input type="text" name="name" required><br>
           <label>CATEGORY</label><br>
-          <input type="text" name="idCategory"><br>
+          <select class="custom-select" name="idCategory"
+                  style="width: 300px">
+            <option value="${pr.category.cId}"
+                    hidden="">${pr.category.cName}</option>
+            <c:forEach var="cr" items='${requestScope["categoryList"]}'>
+              <option value="${cr.cId}">${cr.cName}</option>
+            </c:forEach>
+          </select><br>
           <label>PRICE</label><br>
-          <input type="text" name="price"><br>
+          <input type="text" name="price" required><br>
           <label>IMAGE</label><br>
           <img src="${requestScope["product"].getImage()}" alt="" style="width: 100px;height: 100px">
           <br>
@@ -260,7 +267,7 @@
           <input name="image" type="text" id="avatar" style="display: none" >
           <div id="imgDiv"></div>
           <label>QUANTITY</label><br>
-          <input type="text" name="qty"><br>
+          <input type="text" name="qty" required><br>
           <c:if test='${requestScope["message"] != null}'>
             <span class="message">${requestScope["message"]}</span>
           </c:if> <br>

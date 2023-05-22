@@ -27,7 +27,7 @@
 <%--                    </c:if>--%>
                     <div class="col-md-3 col-sm-4">
                         <div class="single-new-arrival">
-                            <div class="single-new-arrival-bg">
+                            <div class="single-new-arrival-bg" style="min-height: 255px">
                                 <img src="${pr.image}" alt="new-arrivals images">
                                 <div class="single-new-arrival-bg-overlay"></div>
                                 <div class="new-arrival-cart">
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <h4><a href="home?action=detail&productId=${pr.id}">${pr.name}</a></h4>
-                            <p class="arrival-product-price">${pr.price}</p>
+                            <p class="arrival-product-price">${pr.price} $</p>
                         </div>
                     </div>
                 </c:forEach>

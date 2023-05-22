@@ -120,10 +120,16 @@ public class CategoryController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Category category = categoryService.findById(id);
         String name = request.getParameter("name");
-        category.setcName(name);
-        categoryService.save(category);
-        request.setAttribute("message", "EDIT CATEGORY SUCCESS !!!");
-        showListCategory(request,response);
+        if (name == ""){
+            request.setAttribute("ms","không được để trống tên");
+            showListCategory(request,response);
+        } else {
+            category.setcName(name);
+            categoryService.save(category);
+            request.setAttribute("message", "EDIT CATEGORY SUCCESS !!!");
+            showListCategory(request,response);
+        }
+
     }
     private void actionSearchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("search");
