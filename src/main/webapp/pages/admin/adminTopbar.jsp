@@ -162,8 +162,9 @@
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="img-profile rounded-circle"
                          src="${sessionScope['userLogin'].getAvatar()}"
-                         style="border-radius: 50px; width: 25px;margin-right: 10px;">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
+                         style="border-radius: 50px; width: 32px;margin-right: 10px;">
+                    <span style="font-weight: 500; color: #1cc88a"
+                          class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
