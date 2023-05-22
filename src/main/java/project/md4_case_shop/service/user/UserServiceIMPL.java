@@ -25,6 +25,7 @@ public class UserServiceIMPL implements IUserService {
     private String FIND_ID = "select name,username,email,password,status,avatar from user where id = ?";
     private String REMOVE = "delete from user where id = ?";
     private String BLOCK_USER = "update user set status = ? where id = ?;";
+
     @Override
     public List<User> findAll() throws SQLException {
         List<User> userList = new ArrayList<>();
@@ -237,6 +238,6 @@ public class UserServiceIMPL implements IUserService {
             throw new RuntimeException(e);
         }
     }
-    // check Name
+    //
 
 }

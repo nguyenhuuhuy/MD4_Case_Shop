@@ -62,9 +62,6 @@
                             <h4 class="m-0 font-weight-bold text-primary">
                                 DataTables Product Manage</h4>
                             <a href="product?action=create" type="button" class="btn btn-success m-0">Create Product</a>
-                            <c:if test="${requestScope['categoryList']!=null}">
-                                <a href="">ok</a>
-                            </c:if>
                         </div>
                     </div>
                     <div class="card-body">

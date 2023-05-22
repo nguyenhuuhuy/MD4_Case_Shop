@@ -22,6 +22,9 @@ public class ProductServiceIMPL implements IProductService{
     private static final String PRODUCT_BY_ID = "SELECT * FROM product where id = ?";
     private static final String DELETE_PRODUCT = "DELETE FROM product WHERE id=?;";
     private static final String SEARCH_BY_CATE = "select * from product pr join category ca on pr.idcategory = ca.id where ca.name  like ? or pr.name like ?; ";
+    private static final String CREATE_LIKE = "insert into likeproduct(productid, userid) value (?,?)";
+    private static final String   CHECK_LIKE_PRODUCT = "select *from likeproduct where productid = ? and userid = ?;";
+    private static final String USER_LIKE = "select likeproduct.productid from likeproduct where userid = ?;";
     @Override
     public List<Product> findAll()  {
         List<Product> productList = new ArrayList<>();
@@ -138,4 +141,61 @@ public class ProductServiceIMPL implements IProductService{
         }
         return categoryListSearch;
     }
+
+    @Override
+    public void saveLike(int productId, int userId) {
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_LIKE);
+            preparedStatement.setInt(1,productId);
+            preparedStatement.setInt(2,userId);
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean checkLikeUser(int productId, int userId) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHECK_LIKE_PRODUCT);
+            preparedStatement.setInt(1,productId);
+            preparedStatement.setInt(2,userId);
+            List<Integer> integerList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int prId = resultSet.getInt("productid");
+                int usId = resultSet.getInt("userid");
+                integerList.add(usId);
+            }
+            for (int i = 0; i < integerList.size(); i++) {
+                if (userId == integerList.get(i)){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+    @Override
+    public List<Integer> userLike(int userId) {
+        List<Integer> integerList;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(USER_LIKE);
+            preparedStatement.setInt(1, userId);
+            integerList = new ArrayList<>();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int prId = resultSet.getInt("productid");
+                integerList.add(prId);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return integerList;
+    }
+
 }

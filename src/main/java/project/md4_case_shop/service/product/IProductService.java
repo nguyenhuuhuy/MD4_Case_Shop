@@ -7,4 +7,10 @@ import java.util.List;
 
 public interface IProductService extends IGenericService<Product> {
     List<Product> findByCategoryAndByName(String categorySearch);
+
+    void saveLike(int productId, int userId);
+
+    boolean checkLikeUser(int productId, int userId);
+
+    List<Integer> userLike(int userId);
 }

@@ -1,8 +1,11 @@
 package project.md4_case_shop.controller;
 
+import project.md4_case_shop.model.Product;
 import project.md4_case_shop.model.Role;
 import project.md4_case_shop.model.RoleName;
 import project.md4_case_shop.model.User;
+import project.md4_case_shop.service.product.IProductService;
+import project.md4_case_shop.service.product.ProductServiceIMPL;
 import project.md4_case_shop.service.role.IRoleService;
 import project.md4_case_shop.service.role.RoleServiceIMPL;
 import project.md4_case_shop.service.user.IUserService;
@@ -23,6 +26,7 @@ import java.util.Set;
 public class UserController extends HttpServlet {
     IUserService userService = new UserServiceIMPL();
     IRoleService roleService = new RoleServiceIMPL();
+    IProductService productService = new ProductServiceIMPL();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -336,4 +340,5 @@ public class UserController extends HttpServlet {
 
     private void actionUpdateAvatar(HttpServletRequest request, HttpServletResponse response) {
     }
+
 }

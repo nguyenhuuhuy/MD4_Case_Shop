@@ -29,7 +29,13 @@
         </div><!--/.section-header-->
         <div class="new-arrivals-content">
             <div class="row" id="ListProductAll">
+                <c:if test='${requestScope["checkLike"]!=null}'>
+                    <p>da like</p>
+                </c:if>
                 <c:forEach var="pr" items='${requestScope["productList"]}'>
+<%--                    <c:if test="${requestScope['prLike'] == requestScope['productList'].id}">--%>
+<%--                        <p>ok</p>--%>
+<%--                    </c:if>--%>
                     <div class="col-md-3 col-sm-4">
                         <div class="single-new-arrival">
                             <div class="single-new-arrival-bg">
@@ -41,7 +47,7 @@
                                         <a href="cart?action=add&id=${pr.id}&qty=1">add <span>to </span> cart</a>
                                     </p>
                                     <p class="arrival-review pull-right">
-                                        <span class="lnr lnr-heart"></span>
+                                        <a href="home?action=like&id=${pr.id}"><span class="lnr lnr-heart" ></span></a>
                                         <span class="lnr lnr-frame-expand"></span>
                                     </p>
                                 </div>

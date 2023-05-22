@@ -36,6 +36,13 @@ public class HomeController extends HttpServlet {
                 action = "";
             }
             switch (action) {
+                case "like":
+                    try {
+                        like(request,response);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
                 case "detail":
                     detailProduct(request,response);
                     break;
@@ -108,7 +115,6 @@ public class HomeController extends HttpServlet {
             }
             request.setAttribute("cartUser", cart);
         }
-
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("pages/home/home.jsp").forward(request, response);
     }
@@ -126,8 +132,17 @@ public class HomeController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("product/homeDetail.jsp");
         dispatcher.forward(request,response);
     }
-//    private void actionAddComment(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
-//
-//        detailProduct(request,response);
-//    }
+
+    private void like(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = getUserLogin(request);
+        int userId = user.getId();
+        if (productService.checkLikeUser(id,userId)){
+            request.setAttribute("checkLike", "ban da like");
+            showListProduct(request,response);
+        }else {
+            productService.saveLike(id,userId);
+           showListProduct(request,response);
+        }
+    }
 }
