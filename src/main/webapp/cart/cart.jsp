@@ -16,7 +16,8 @@
 </jsp:include>
 <body>
 
-<table border="1" width="100%" class="table table-striped table-hover" style="margin-top: 200px">
+<table border="1" width="100%" class="table table-striped table-hover"
+       style="margin-top: 200px; margin-right: 10%;">
     <tr>
         <th>No.</th>
         <th>Image</th>
@@ -29,7 +30,7 @@
         <tr>
             <td>${loop.count}</td>
             <td width="50">
-                <img src="${pr.image}" alt="img" width="50" height="50">
+                <img src="${pr.image}" alt="img" width="60px" height="60px">
             </td>
             <td>${pr.name}</td>
             <td>${pr.price}</td>
@@ -44,7 +45,7 @@
     </c:forEach>
     <tr>
         <td colspan="5">
-            <h4>
+            <h4 style="justify-content: flex-end; display: flex">
                 Total: ${requestScope['cart'].getTotal()}
             </h4>
         </td>
@@ -52,12 +53,14 @@
     <tr></tr>
 </table>
 
-<div style="display: flex; justify-content: space-between">
+<div style="display: flex; justify-content: flex-end">
     <a href="cart?action=order">
-        <button class="btn btn-success"><i class="bi bi-bag-plus"></i> Order</button>
+        <button style="margin: 0 5px" class="btn btn-success"><i class="bi bi-bag-plus"></i> Order</button>
     </a><br><br>
     <a href="cart?action=history">
-        <button class="btn btn-block"><i class="bi bi-clock-history"></i> History</button>
+        <button class="btn btn-block" style="color: white; background-color: #dda20a; margin: 0 5px"><i
+                class="bi bi-clock-history"></i> History
+        </button>
     </a><br><br>
 
 </div>

@@ -62,10 +62,10 @@
                                    role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                        <div style="margin-top: -5px">
+                                        <div style="margin-top: -8px">
                                             <img class="img-profile rounded-circle "
                                                  src="${sessionScope['userLogin'].getAvatar()}"
-                                                 style="border-radius: 50px; width: 25px;margin-right: 10px;  ">
+                                                 style="border-radius: 100%; width: 30px;height:30px;margin-right: 10px;  ">
                                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
                                         </div>
 
@@ -85,7 +85,7 @@
                                         <div>
                                             <c:if test='${sessionScope["userLogin"]!=null}'>
                                                 <a class="dropdown-item btn-cart welcome-add-cart logout_button"
-                                                   style="text-align: center"
+                                                   style="text-align: center; margin-top: 1%"
                                                    href="/user?action=logout">
                                                     Log Out
                                                 </a>

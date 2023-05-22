@@ -26,10 +26,14 @@
 </jsp:include>
 <body>
 <div style="margin-top: 200px">
-    <h4 class="p-2">
-        <span class="custom" style="color: black;" onclick="displayWaiting()" id="waiting-text">Waiting</span>
-        <span class="custom" onclick="displayHistory()" id="history-text">History</span>
-        <span class="custom" onclick="displayCancelled()" id="cancelled-text">Cancelled</span>
+    <h1 style="font-size: 25px; margin-bottom: 10px; text-align: center">Select history: </h1>
+    <h4 class="p-2" style="text-align: center; margin-bottom: 7px; padding: 5px">
+        <span class="custom btn-success" style="color: black; background-color: yellow;" onclick="displayWaiting()"
+              id="waiting-text">Waiting</span>
+        <span class="custom btn-success" style="color: black; background-color: #60f607; margin-left: 5px; margin-right: 5px" onclick="displayHistory()"
+              id="history-text">History</span>
+        <span class="custom btn-success" style="color: black; background-color: #9b2a2a" onclick="displayCancelled()"
+              id="cancelled-text">Cancelled</span>
     </h4>
 
 </div>
@@ -42,20 +46,20 @@
             <th>Total</th>
             <th>Retrieve</th>
         </tr>
-<%--            <c:forEach items="${requestScope['orderedCarts'].products}" var="pr">--%>
-<%--                <p>${pr.quantity}</p>--%>
-<%--            </c:forEach>--%>
+        <%--            <c:forEach items="${requestScope['orderedCarts'].products}" var="pr">--%>
+        <%--                <p>${pr.quantity}</p>--%>
+        <%--            </c:forEach>--%>
         <c:forEach items="${requestScope['orderedCarts']}" var="cart">
-                <tr>
-                    <td>${cart.id}</td>
-                    <td>${cart.created}</td>
-                    <td>${cart.getTotal()}</td>
-                    <td>
-                        <a href="cart?action=removeUserCart&id=${cart.id}">
-                            <button class="btn btn-danger">Retrieve</button>
-                        </a>
-                    </td>
-                </tr>
+            <tr>
+                <td>${cart.id}</td>
+                <td>${cart.created}</td>
+                <td>${cart.getTotal()}</td>
+                <td>
+                    <a href="cart?action=removeUserCart&id=${cart.id}">
+                        <button class="btn btn-danger">Retrieve</button>
+                    </a>
+                </td>
+            </tr>
         </c:forEach>
     </table>
 </div>

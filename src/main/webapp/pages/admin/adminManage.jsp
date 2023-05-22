@@ -55,10 +55,10 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr align="center">
-                                    <th>id</th>
-                                    <th>name</th>
-                                    <th>img</th>
-                                    <th colspan="2">qty</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th colspan="2">Quantity</th>
                                 </tr>
                                 </thead>
                                 <tbody>

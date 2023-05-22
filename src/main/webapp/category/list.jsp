@@ -49,7 +49,7 @@
                             </h4>
                             <div style="color: #1cc88a; margin-top: 10px">
                                 <c:if test='${requestScope["message"] != null}'>
-                                    <span class="message">${requestScope["message"]}</span>
+                                    <marquee class="message">${requestScope["message"]}</marquee>
                                 </c:if>
                             </div>
                             <a href="category?action=create" type="text" class="btn btn-success m-0"
@@ -108,7 +108,7 @@
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
                                                         <h5 class="modal-title" id="exampleModalLabel9">
-                                                            Ready edit category :
+                                                            Edit category :
                                                         </h5>
                                                         <h5 class="modal-body" style="padding: 4px">ID ${cate.cId}
                                                             ?</h5>
@@ -146,7 +146,7 @@
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
                                                         <h5 class="modal-title" id="exampleModalLabel2">
-                                                            Ready delete Category :
+                                                            Delete Category :
                                                         </h5>
                                                         <h5 class="modal-body" style="padding: 4px">ID ${cate.cId}
                                                             ?</h5>

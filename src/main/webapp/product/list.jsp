@@ -40,7 +40,7 @@
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
             <c:if test='${requestScope["message"] != null}'>
-                <span class="message">${requestScope["message"]}</span>
+                <marquee class="message">${requestScope["message"]}</marquee>
             </c:if>
             <!-- Begin Page Content -->
             <script>

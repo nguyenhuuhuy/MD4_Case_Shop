@@ -37,242 +37,248 @@
             <!-- Topbar -->
             <jsp:include page="../pages/admin/adminTopbar.jsp"></jsp:include>
             <!-- End of Topbar -->
-            <c:if test='${requestScope["message"] != null}'>
-                <span class="message" style="color: red; margin-left: 400px;">${requestScope["message"]}</span>
-            </c:if>
+
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h4 class="m-0 font-weight-bold text-primary">DataTables User Manage</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
+
+                    <div class="card-header py-3" style="display: flex; justify-content: space-between;>
+                        <h4 class=" m-0 font-weight-bold text-primary
+                    ">DataTables User Manage</h4>
+                    <c:if test='${requestScope["message"] != null}'>
+                        <marquee class="message"
+                              style="color: #35a81a; margin-left: 400px;">${requestScope["message"]}</marquee>
+                    </c:if>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr align="center">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>UserName</th>
+                                <th>Email</th>
+                                <th>Avatar</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Block</th>
+                                <th>Edit</th>
+                                <%--                                    <th>Delete</th>--%>
+
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr align="center">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>UserName</th>
+                                <th>Email</th>
+                                <th>Avatar</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Block</th>
+                                <th>Edit</th>
+                                <%--                                    <th>Delete</th>--%>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <c:forEach items='${requestScope["listUser"]}' var="user">
                                 <tr align="center">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>UserName</th>
-                                    <th>Email</th>
-                                    <th>Avatar</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Block</th>
-                                    <th>Edit</th>
-<%--                                    <th>Delete</th>--%>
+                                    <td>${user.id}</td>
+                                    <td>${user.name}</td>
+                                    <td>${user.username}</td>
+                                    <td>${user.email}</td>
+                                    <td>
+                                        <img src="${user.avatar}" alt="avatar" width="40" height="40">
+                                    </td>
+                                    <td>
+                                        <c:forEach items="${user.getRoleSet()}" var="Role"> ${Role.getName()}
+                                        </c:forEach>
+                                    </td>
+                                    <td>${user.status == false ? "Unlock" :"Lock"}</td>
+                                    <td>
+                                        <a type='button' class='dropdown-item' data-toggle='modal'
+                                           data-target='#blockUser${user.id}'>
+                                                ${user.status == false ? "<i class='fa-solid fa-shop-lock' style='color: #f5003d;'></i>" : "<i class='fa-solid fa-key' style='color: #2861c3'></i>"}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a type="button" class="dropdown-item" data-toggle="modal"
+                                           data-target="#editUser${user.id}">
+                                            <i class="fa-sharp fa-solid fa-pen-to-square"
+                                               style="color: #2a65b2;"></i>
+                                        </a>
+                                    </td>
+                                        <%--                                        <td>--%>
+                                        <%--                                            <a type="button" class="dropdown-item" data-toggle="modal"--%>
+                                        <%--                                               data-target="#deleteUser${user.id}">--%>
+                                        <%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
+                                        <%--                                            </a>--%>
+                                        <%--                                        </td>--%>
 
                                 </tr>
-                                </thead>
-                                <tfoot>
-                                <tr align="center">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>UserName</th>
-                                    <th>Email</th>
-                                    <th>Avatar</th>
-                                    <th>Role</th>
-                                    <th>Status</th>
-                                    <th>Block</th>
-                                    <th>Edit</th>
-<%--                                    <th>Delete</th>--%>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                <c:forEach items='${requestScope["listUser"]}' var="user">
-                                    <tr align="center">
-                                        <td>${user.id}</td>
-                                        <td>${user.name}</td>
-                                        <td>${user.username}</td>
-                                        <td>${user.email}</td>
-                                        <td>
-                                            <img src="${user.avatar}" alt="avatar" width="40" height="40">
-                                        </td>
-                                        <td>
-                                            <c:forEach items="${user.getRoleSet()}" var="Role"> ${Role.getName()}
-                                            </c:forEach>
-                                        </td>
-                                        <td>${user.status == false ? "Unlock" :"Lock"}</td>
-                                        <td>
-                                            <a type='button' class='dropdown-item' data-toggle='modal'
-                                               data-target='#blockUser${user.id}'>
-                                                    ${user.status == false ? "<i class='fa-solid fa-shop-lock' style='color: #f5003d;'></i>" : "<i class='fa-solid fa-key' style='color: #2861c3'></i>"}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#editUser${user.id}">
-                                                <i class="fa-sharp fa-solid fa-pen-to-square"
-                                                   style="color: #2a65b2;"></i>
-                                            </a>
-                                        </td>
-<%--                                        <td>--%>
-<%--                                            <a type="button" class="dropdown-item" data-toggle="modal"--%>
-<%--                                               data-target="#deleteUser${user.id}">--%>
-<%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
-<%--                                            </a>--%>
-<%--                                        </td>--%>
-
-                                    </tr>
-                                    <!-- Block User-->
-                                    <div class="modal fade" id="blockUser${user.id}" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                    </div>
-                                                    <button class="close" type="button" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true" style="color: red">x</span>
-                                                    </button>
+                                <!-- Block User-->
+                                <div class="modal fade" id="blockUser${user.id}" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div style="display: flex ; justify-content: flex-start; color: #f5a106">
                                                 </div>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true" style="color: red">x</span>
+                                                </button>
+                                            </div>
 
-                                                <div align="center">
-                                                    <h1>BLOCK / UNLOCK USER</h1>
-                                                    <p style="margin-bottom: 1px; margin-top: 8px">${user.name}</p>
+                                            <div align="center">
+                                                <h1>BLOCK / UNLOCK USER</h1>
+                                                <p style="margin-bottom: 1px; margin-top: 8px">${user.name}</p>
 
-                                                    <p style="margin-bottom: 1px; margin-top: 17px">
-                                                        Are you sure you want to Block/unlock ?</p><br>
-                                                    <a href="/user?action=block&id=${user.id}"
-                                                       class="btn btn-danger m-2">
-                                                        Submit
-                                                    </a>
+                                                <p style="margin-bottom: 1px; margin-top: 17px">
+                                                    Are you sure you want to Block/unlock ?</p><br>
+                                                <a href="/user?action=block&id=${user.id}"
+                                                   class="btn btn-danger m-2">
+                                                    Submit
+                                                </a>
+                                                <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End BlockUser-->
+                                <!-- Edit Modal-->
+                                <div class="modal fade" id="editUser${user.id}" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                    <h1>EDIT USER</h1>
+                                                </div>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true" style="color: red">x</span>
+                                                </button>
+                                            </div>
+
+                                            <div align="center">
+                                                <form action="/user?action=edit&id=${user.id}"
+                                                      method="post">
+                                                    <h2>
+                                                        <c:if test='${requestScope["message"]!=null}'>
+                                                            <h2 style="color: red">${requestScope["message"]}</h2>
+                                                        </c:if>
+                                                    </h2>
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
+
+                                                    <input type="text" name="id" value="${user.id}" disabled>
+
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
+
+                                                    <input type="text" name="name" value="${user.name}" required>
+
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
+
+                                                    <input type="email" name="email" value="${user.email}" required>
+
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Password:</p>
+
+                                                    <input type="text" name="password" value="${user.password}"
+                                                           required>
+
+                                                    <br>
+                                                    <button type="submit" class="btn btn-success m-3">
+                                                        EDIT
+                                                    </button>
                                                     <button class="btn btn-secondary" type="button"
                                                             data-dismiss="modal">Cancel
                                                     </button>
-                                                </div>
+                                                </form>
                                             </div>
+
                                         </div>
                                     </div>
-                                    <!-- End BlockUser-->
-                                    <!-- Edit Modal-->
-                                    <div class="modal fade" id="editUser${user.id}" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
+                                </div>
+                                <!-- End Edit Modal-->
 
-                                                <div class="modal-header">
-                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h1>EDIT USER</h1>
-                                                    </div>
-                                                    <button class="close" type="button" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true" style="color: red">x</span>
+                                <!-- Delete Modal-->
+                                <div class="modal fade" id="deleteUser${user.id}" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div style="display: flex ; justify-content: flex-start; color: #f5a106">
+                                                    <h1>DELETE USER</h1>
+                                                </div>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true" style="color: red">x</span>
+                                                </button>
+                                            </div>
+
+                                            <div align="center">
+                                                <form action="/user?action=delete&id=${user.id}"
+                                                      method="post">
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
+
+                                                    <input type="text" name="id" value="${user.id}" disabled>
+
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
+
+                                                    <input type="text" name="name" value="${user.name}" disabled>
+
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
+
+                                                    <input type="text" name="email" value="${user.email}" disabled>
+
+                                                    <br>
+                                                    <p style="margin-bottom: 1px; margin-top: 17px">
+                                                        Are you sure you want to delete ?</p><br>
+                                                    <button type="submit" class="btn btn-danger m-2">
+                                                        Delete
                                                     </button>
-                                                </div>
-
-                                                <div align="center">
-                                                    <form action="/user?action=edit&id=${user.id}"
-                                                          method="post">
-                                                        <h2>
-                                                            <c:if test='${requestScope["message"]!=null}'>
-                                                                <h2 style="color: red">${requestScope["message"]}</h2>
-                                                            </c:if>
-                                                        </h2>
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
-
-                                                        <input type="text" name="id" value="${user.id}" disabled>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
-
-                                                        <input type="text" name="name" value="${user.name}" required>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
-
-                                                        <input type="email" name="email" value="${user.email}" required>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Password:</p>
-
-                                                        <input type="text" name="password" value="${user.password}" required>
-
-                                                         <br>
-                                                        <button type="submit" class="btn btn-success m-3">
-                                                            EDIT
-                                                        </button>
-                                                        <button class="btn btn-secondary" type="button"
-                                                                data-dismiss="modal">Cancel
-                                                        </button>
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Edit Modal-->
-
-                                    <!-- Delete Modal-->
-                                    <div class="modal fade" id="deleteUser${user.id}" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel"
-                                         aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h1>DELETE USER</h1>
-                                                    </div>
-                                                    <button class="close" type="button" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true" style="color: red">x</span>
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-dismiss="modal">Cancel
                                                     </button>
-                                                </div>
-
-                                                <div align="center">
-                                                    <form action="/user?action=delete&id=${user.id}"
-                                                          method="post">
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
-
-                                                        <input type="text" name="id" value="${user.id}" disabled>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Name:</p>
-
-                                                        <input type="text" name="name" value="${user.name}" disabled>
-
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">Email:</p>
-
-                                                        <input type="text" name="email" value="${user.email}" disabled>
-
-                                                        <br>
-                                                        <p style="margin-bottom: 1px; margin-top: 17px">
-                                                            Are you sure you want to delete ?</p><br>
-                                                        <button type="submit" class="btn btn-danger m-2">
-                                                            Delete
-                                                        </button>
-                                                        <button class="btn btn-secondary" type="button"
-                                                                data-dismiss="modal">Cancel
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- End Delete Modal-->
+                                </div>
+                                <!-- End Delete Modal-->
 
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <!-- /.container-fluid -->
-
         </div>
-        <!-- End of Main Content -->
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Designed And Developed By CHS</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
+        <!-- /.container-fluid -->
+
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Designed And Developed By CHS</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+</div>
+<!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
 
