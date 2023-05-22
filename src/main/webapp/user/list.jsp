@@ -61,7 +61,7 @@
                                     <th>Status</th>
                                     <th>Block</th>
                                     <th>Edit</th>
-                                    <th>Delete</th>
+<%--                                    <th>Delete</th>--%>
 
                                 </tr>
                                 </thead>
@@ -76,7 +76,7 @@
                                     <th>Status</th>
                                     <th>Block</th>
                                     <th>Edit</th>
-                                    <th>Delete</th>
+<%--                                    <th>Delete</th>--%>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -93,12 +93,12 @@
                                             <c:forEach items="${user.getRoleSet()}" var="Role"> ${Role.getName()}
                                             </c:forEach>
                                         </td>
-                                        <td>${user.status == false ? "<i class='fa-solid fa-circle' style='color: #11ff00;'></i>" :"<i class='fa-solid fa-circle' style='color: #000000;'></i>"}</td>
+                                        <td>${user.status == false ? "Unlock" :"Lock"}</td>
                                         <td>
-                                                <a type="button" class="dropdown-item" data-toggle="modal"
-                                                   data-target="#blockUser${user.id}">
-                                                    <i class="fa fa-lock" aria-hidden="true" style="color: #ef4949"></i>
-                                                </a>
+                                            <a type='button' class='dropdown-item' data-toggle='modal'
+                                               data-target='#blockUser${user.id}'>
+                                                    ${user.status == false ? "<i class='fa-solid fa-shop-lock' style='color: #f5003d;'></i>" : "<i class='fa-solid fa-key' style='color: #2861c3'></i>"}
+                                            </a>
                                         </td>
                                         <td>
                                             <a type="button" class="dropdown-item" data-toggle="modal"
@@ -107,12 +107,12 @@
                                                    style="color: #2a65b2;"></i>
                                             </a>
                                         </td>
-                                        <td>
-                                            <a type="button" class="dropdown-item" data-toggle="modal"
-                                               data-target="#deleteUser${user.id}">
-                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>
-                                            </a>
-                                        </td>
+<%--                                        <td>--%>
+<%--                                            <a type="button" class="dropdown-item" data-toggle="modal"--%>
+<%--                                               data-target="#deleteUser${user.id}">--%>
+<%--                                                <i class="fa-solid fa-trash" style="color: #ef4949"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </td>--%>
 
                                     </tr>
                                     <!-- Block User-->
@@ -131,17 +131,18 @@
                                                 </div>
 
                                                 <div align="center">
-                                                    <h1>BLOCK USER</h1>
-                                                        <p style="margin-bottom: 1px; margin-top: 8px">${user.name}</p>
+                                                    <h1>BLOCK / UNLOCK USER</h1>
+                                                    <p style="margin-bottom: 1px; margin-top: 8px">${user.name}</p>
 
-                                                        <p style="margin-bottom: 1px; margin-top: 17px">
-                                                            Are you sure you want to Block ?</p><br>
-                                                        <a href="/user?action=block&id=${user.id}" class="btn btn-danger m-2">
-                                                            Block
-                                                        </a>
-                                                        <button class="btn btn-secondary" type="button"
-                                                                data-dismiss="modal">Cancel
-                                                        </button>
+                                                    <p style="margin-bottom: 1px; margin-top: 17px">
+                                                        Are you sure you want to Block/unlock ?</p><br>
+                                                    <a href="/user?action=block&id=${user.id}"
+                                                       class="btn btn-danger m-2">
+                                                        Submit
+                                                    </a>
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-dismiss="modal">Cancel
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,11 +157,7 @@
 
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="editUser">
-                                                            Ready edit user :
-                                                        </h5>
-                                                        <h5 class="modal-body" style="padding: 4px">ID ${user.id}
-                                                            ?</h5>
+                                                        <h1>EDIT USER</h1>
                                                     </div>
                                                     <button class="close" type="button" data-dismiss="modal"
                                                             aria-label="Close">
@@ -169,7 +166,6 @@
                                                 </div>
 
                                                 <div align="center">
-                                                    <h1>EDIT USER</h1>
                                                     <form action="/user?action=edit&id=${user.id}"
                                                           method="post">
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
@@ -213,11 +209,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <div style="display: flex ; justify-content: flex-start; color: #f5a106">
-                                                        <h5 class="modal-title" id="deleteUser">
-                                                            Ready delete user :
-                                                        </h5>
-                                                        <h5 class="modal-body" style="padding: 4px">ID ${user.id}
-                                                            ?</h5>
+                                                        <h1>DELETE USER</h1>
                                                     </div>
                                                     <button class="close" type="button" data-dismiss="modal"
                                                             aria-label="Close">
@@ -226,7 +218,6 @@
                                                 </div>
 
                                                 <div align="center">
-                                                    <h1>DELETE USER</h1>
                                                     <form action="/user?action=delete&id=${user.id}"
                                                           method="post">
                                                         <p style="margin-bottom: 1px; margin-top: 8px">Id:</p>
@@ -241,7 +232,7 @@
 
                                                         <input type="text" name="email" value="${user.email}" disabled>
 
-                                                         <br>
+                                                        <br>
                                                         <p style="margin-bottom: 1px; margin-top: 17px">
                                                             Are you sure you want to delete ?</p><br>
                                                         <button type="submit" class="btn btn-danger m-2">
