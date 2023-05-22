@@ -90,10 +90,10 @@ public class UserController extends HttpServlet {
         Set<Role> roleSet = user.getRoleSet();
         List<Role> roles = new ArrayList<>(roleSet);
         if (roles.get(0).getName() == RoleName.ADMIN) {
-            request.setAttribute("message", "bạn không được khóa tk này");
+            request.setAttribute("message", "YOU CAN'T LOCK THIS ACCOUNT");
             listUser(request, response);
         } else if (roles.get(0).getName() == roleListUserLogin.get(0).getName()) {
-            request.setAttribute("message", "TK cùng cấp");
+            request.setAttribute("message", "THIS ACCOUNT IS INVALID ");
             listUser(request, response);
         } else {
             userService.blockUser(user);
@@ -186,7 +186,7 @@ public class UserController extends HttpServlet {
         user.setEmail(email);
         user.setPassword(password);
         userService.save(user);
-        request.setAttribute("message", "Đã Thành Công");
+        request.setAttribute("message", "EDIT SUCCESS");
         listUser(request, response);
     }
 
@@ -225,14 +225,14 @@ public class UserController extends HttpServlet {
     private void actionDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         if (id == 1) {
-            request.setAttribute("message", "can't delete admin");
+            request.setAttribute("message", "CAN'T DELETE ADMIN");
             return;
         } else if (id == 2) {
-            request.setAttribute("message", "can't delete pm");
+            request.setAttribute("message", "CAN'T DELETE PM");
             return;
         } else {
             userService.deleteById(id);
-            request.setAttribute("message", "Xóa Thành Công");
+            request.setAttribute("message", "DELETE SUCCESS");
         }
             listUser(request, response);
     }
@@ -260,7 +260,7 @@ public class UserController extends HttpServlet {
             }
         });
         if (userService.existedByUserName(username)) {
-            request.setAttribute("validate", "Tài khoản đã tồn tại");
+            request.setAttribute("validate", "Account already exists");
             request.setAttribute("name", name);
             request.setAttribute("userName", username);
             request.setAttribute("email", email);
@@ -268,7 +268,7 @@ public class UserController extends HttpServlet {
             showFormRegister(request, response);
 
         } else if (userService.existedByEmail(email)) {
-            request.setAttribute("validate", "Email đã tồn tại");
+            request.setAttribute("validate", "Email already exists");
             request.setAttribute("name", name);
             request.setAttribute("userName", username);
             request.setAttribute("email", email);
@@ -327,7 +327,7 @@ public class UserController extends HttpServlet {
                 }
             }
         } else {
-            request.setAttribute("validate", "Đăng nhập thất bại vui lòng kiểm tra lại mật khẩu và tài khoản đăng nhập");
+            request.setAttribute("validate", "Login failed, please check your password and login account");
             showFormLogin(request, response);
         }
     }

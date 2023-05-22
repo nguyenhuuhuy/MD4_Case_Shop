@@ -146,7 +146,7 @@ public class HomeController extends HttpServlet {
         }
         int userId = user.getId();
         if (productService.checkLikeUser(id,userId)){
-            request.setAttribute("checkLike", "ban da like");
+            request.setAttribute("checkLike", "Like OK");
             showListProduct(request,response);
         }else {
             productService.saveLike(id,userId);
