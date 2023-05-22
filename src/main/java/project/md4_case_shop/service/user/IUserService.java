@@ -11,7 +11,6 @@ public interface IUserService extends IGenericService<User> {
     boolean existedByEmail(String email);
     User userLogin(String username, String password, boolean status);
     Set<Role> findRoleByUserId(int user_id);
-    void updateAvatar(String avatar, int id);
     void blockUser(User user);
 
 }

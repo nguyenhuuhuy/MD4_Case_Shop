@@ -20,7 +20,6 @@ public class UserServiceIMPL implements IUserService {
     private final String INSERT_INTO_USER_ROLE = "INSERT INTO userrole(iduser, idrole) VALUES (?,?);";
     private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND convert(password using utf8mb4) collate utf8mb4_bin=? AND status=?;";
     private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
-    private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
     private String UPDATE_USER = "update user set name = ?, username = ?, email = ?, password = ?, status = ?, avatar = ? where id = ?";
     private String FIND_ID = "select name,username,email,password,status,avatar from user where id = ?";
     private String REMOVE = "delete from user where id = ?";
@@ -209,20 +208,6 @@ public class UserServiceIMPL implements IUserService {
             throw new RuntimeException(e);
         }
         return roleSet;
-    }
-
-    @Override
-    public void updateAvatar(String avatar, int id) {
-        try {
-            connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_AVATAR);
-            preparedStatement.setString(1, avatar);
-            preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
-            connection.commit();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override

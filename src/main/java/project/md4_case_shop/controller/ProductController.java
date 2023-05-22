@@ -171,10 +171,7 @@ public class ProductController extends HttpServlet {
         int qty = Integer.parseInt(request.getParameter("qty"));
         Product product = new Product(name, idCategory, price, image, qty);
         productService.save(product);
-
         request.setAttribute("message", "CREATED PRODUCT SUCCESS !!!");
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("product/create.jsp");
-        dispatcher.forward(request, response);
+        showListProduct(request,response);
     }
 }

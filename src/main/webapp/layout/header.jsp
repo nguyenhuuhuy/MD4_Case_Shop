@@ -61,12 +61,15 @@
                                 <a class="nav-link-user-responsive nav-link dropdown-toggle " id="userDropdown"
                                    role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div style="margin-top: -5px">
-                                        <img class="img-profile rounded-circle "
-                                             src="${sessionScope['userLogin'].getAvatar()}"
-                                             style="border-radius: 50px; width: 25px;margin-right: 10px;  ">
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
-                                    </div>
+
+                                        <div style="margin-top: -5px">
+                                            <img class="img-profile rounded-circle "
+                                                 src="${sessionScope['userLogin'].getAvatar()}"
+                                                 style="border-radius: 50px; width: 25px;margin-right: 10px;  ">
+                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope["userLogin"].getName()}</span>
+                                        </div>
+
+
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in header_dropdown_content site_account header_home_dropdown"
                                      aria-labelledby="userDropdown">
