@@ -15,9 +15,9 @@ public class ConnectMySQL {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(URL,USER,PASS);
-            System.out.println("Kết nối thành công !");
+            System.out.println("CONNECTION SUCCESS !");
         } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Kết nối thất bại !");
+            System.out.println("CONNECTION ERROR !");
             throw new RuntimeException(e);
         }
         return connection;
