@@ -44,14 +44,14 @@
                                                 <del>$ 499.00</del>
                                             </p>
                                         </div>
-                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
-                                            <span class="lnr lnr-plus-circle"></span>
-                                            add <span>to</span> cart
-                                        </button>
-                                        <button class="btn-cart welcome-add-cart welcome-more-info"
-                                                onclick="window.location.href='#'">
-                                            more info
-                                        </button>
+<%--                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">--%>
+                                        <%--                                            <span class="lnr lnr-plus-circle"></span>--%>
+                                        <%--                                            add <span>to</span> cart--%>
+                                        <%--                                        </button>--%>
+                                        <%--                                        <button class="btn-cart welcome-add-cart welcome-more-info"--%>
+                                        <%--                                                onclick="window.location.href='#'">--%>
+                                        <%--                                            more info--%>
+                                        <%--                                        </button>--%>
                                     </div><!--/.welcome-hero-txt-->
                                 </div><!--/.single-welcome-hero-->
                             </div><!--/.col-->
@@ -90,14 +90,14 @@
                                                 <del>$ 299.00</del>
                                             </p>
                                         </div>
-                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
-                                            <span class="lnr lnr-plus-circle"></span>
-                                            add <span>to</span> cart
-                                        </button>
-                                        <button class="btn-cart welcome-add-cart welcome-more-info"
-                                                onclick="window.location.href='#'">
-                                            more info
-                                        </button>
+<%--                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">--%>
+<%--                                            <span class="lnr lnr-plus-circle"></span>--%>
+<%--                                            add <span>to</span> cart--%>
+<%--                                        </button>--%>
+<%--                                        <button class="btn-cart welcome-add-cart welcome-more-info"--%>
+<%--                                                onclick="window.location.href='#'">--%>
+<%--                                            more info--%>
+<%--                                        </button>--%>
                                     </div><!--/.welcome-hero-txt-->
                                 </div><!--/.single-welcome-hero-->
                             </div><!--/.col-->
@@ -136,14 +136,14 @@
                                                 <del>$ 399.00</del>
                                             </p>
                                         </div>
-                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">
-                                            <span class="lnr lnr-plus-circle"></span>
-                                            add <span>to</span> cart
-                                        </button>
-                                        <button class="btn-cart welcome-add-cart welcome-more-info"
-                                                onclick="window.location.href='#'">
-                                            more info
-                                        </button>
+<%--                                        <button class="btn-cart welcome-add-cart" onclick="window.location.href='#'">--%>
+<%--                                            <span class="lnr lnr-plus-circle"></span>--%>
+<%--                                            add <span>to</span> cart--%>
+<%--                                        </button>--%>
+<%--                                        <button class="btn-cart welcome-add-cart welcome-more-info"--%>
+<%--                                                onclick="window.location.href='#'">--%>
+<%--                                            more info--%>
+<%--                                        </button>--%>
                                     </div><!--/.welcome-hero-txt-->
                                 </div><!--/.single-welcome-hero-->
                             </div><!--/.col-->
