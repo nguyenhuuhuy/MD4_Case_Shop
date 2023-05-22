@@ -24,13 +24,6 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String checkRoleValidate = UserServiceIMPL.checkCurrenUser(request,response);
-            if (checkRoleValidate.equalsIgnoreCase("NONE")){
-                return;
-            } if (checkRoleValidate.equalsIgnoreCase("user")){
-                response.sendRedirect("index.jsp");
-                return;
-            }
             String action = request.getParameter("action");
             if (action == null) action = "";
             switch (action) {
