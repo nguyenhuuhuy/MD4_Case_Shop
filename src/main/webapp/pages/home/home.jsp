@@ -23,6 +23,9 @@
 <%--collection--%>
 <jsp:include page="/pages/home/collection.jsp"></jsp:include>
 <%--collection--%>
+<%--best--%>
+<jsp:include page="/pages/home/best.jsp"></jsp:include>
+<%--best--%>
 <%--featuredProducts--%>
 <jsp:include page="/pages/home/featuredProducts.jsp"></jsp:include>
 <%--featuredProducts--%>

@@ -25,6 +25,7 @@ public class ProductServiceIMPL implements IProductService{
     private static final String CREATE_LIKE = "insert into likeproduct(productid, userid) value (?,?)";
     private static final String   CHECK_LIKE_PRODUCT = "select *from likeproduct where productid = ? and userid = ?;";
     private static final String USER_LIKE = "select likeproduct.userid from likeproduct where productid = ?;";
+    private static final String TOP = "select p.name, p.idcategory, p.img, c.idproduct, sum(c.quantity) qty from cartproduct c join product p on p.id = c.idproduct group by c.idproduct order by qty desc ;";
     @Override
     public List<Product> findAll()  {
         List<Product> productList = new ArrayList<>();
@@ -196,6 +197,26 @@ public class ProductServiceIMPL implements IProductService{
             throw new RuntimeException(e);
         }
         return integerList;
+    }
+
+    @Override
+    public List<Product> topShopping() {
+        List<Product> productList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(TOP);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                int prId = resultSet.getInt("idproduct");
+                String prName = resultSet.getString("name");
+                String image = resultSet.getString("img");
+                int qty = resultSet.getInt("qty");
+                Product product = new Product(prId,prName,image,qty);
+                productList.add(product);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return productList;
     }
 
 }

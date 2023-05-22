@@ -13,4 +13,5 @@ public interface IProductService extends IGenericService<Product> {
     boolean checkLikeUser(int productId, int userId);
 
     List<Integer> userLike(int productId);
+    List<Product> topShopping();
 }

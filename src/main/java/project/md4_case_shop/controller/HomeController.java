@@ -115,6 +115,8 @@ public class HomeController extends HttpServlet {
             }
             request.setAttribute("cartUser", cart);
         }
+        List<Product> topProductList = productService.topShopping();
+        request.setAttribute("top",topProductList);
         request.setAttribute("productList", productList);
         request.getRequestDispatcher("pages/home/home.jsp").forward(request, response);
     }
@@ -138,6 +140,10 @@ public class HomeController extends HttpServlet {
     private void like(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = getUserLogin(request);
+        if (user == null){
+            response.sendRedirect("user?action=login");
+            return;
+        }
         int userId = user.getId();
         if (productService.checkLikeUser(id,userId)){
             request.setAttribute("checkLike", "ban da like");

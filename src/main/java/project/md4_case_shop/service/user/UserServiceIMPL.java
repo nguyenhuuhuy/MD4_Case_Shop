@@ -18,7 +18,7 @@ public class UserServiceIMPL implements IUserService {
     private final String SELECT_ALL_EMAIL = "SELECT email FROM user;";
     private final String INSERT_INTO_USER = "INSERT INTO user(name, username, email, password,avatar) VALUES (?,?,?,?,?);";
     private final String INSERT_INTO_USER_ROLE = "INSERT INTO userrole(iduser, idrole) VALUES (?,?);";
-    private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND password=? AND status=?;";
+    private final String SELECT_USER_LOGIN = "SELECT * FROM user where username=? AND convert(password using utf8mb4) collate utf8mb4_bin=? AND status=?;";
     private final String SELECT_ROLE_BY_USER_ID = "SELECT role.id,role.name FROM role INNER JOIN userrole ur on role.id = ur.idrole where iduser=?;";
     private final String UPDATE_AVATAR = "UPDATE user SET avatar=? WHERE id=?";
     private String UPDATE_USER = "update user set name = ?, username = ?, email = ?, password = ?, status = ?, avatar = ? where id = ?";

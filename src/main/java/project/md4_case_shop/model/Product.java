@@ -35,6 +35,12 @@ public class Product {
         this.image = image;
         this.quantity = qty;
     }
+    public Product(int prId,String prName, String image,int quantiy){
+        this.id = prId;
+        this.name = prName;
+        this.image = image;
+        this.quantity = quantiy;
+    }
 
     public List<User> getLikeList() {
         return likeList;

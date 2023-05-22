@@ -299,7 +299,7 @@ public class UserController extends HttpServlet {
             for (int i = 0; i < roles.size(); i++) {
                 if (roles.get(i).getName() == RoleName.ADMIN || roles.get(i).getName() == RoleName.PM) {
                     try {
-                        response.sendRedirect("pages/admin/adminManage.jsp");
+                        response.sendRedirect("/topOder");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
