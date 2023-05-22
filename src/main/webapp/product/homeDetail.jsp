@@ -210,7 +210,7 @@
                                    rows="10">
                         </div>
                         <c:if test='${sessionScope["userLogin"]==null}'>
-                            <button type="submit" disabled class="round-black-btn">Go to Login</button>
+                            <button type="submit" disabled class="round-black-btn">SUBMIT</button>
                             <p style="color: #ccbb05">SUBMIT => Login to add a comment!</p>
                         </c:if>
                         <c:if test='${sessionScope["userLogin"]!=null}'>
